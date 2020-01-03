@@ -28,6 +28,7 @@ public class Receiver {
   @KafkaListener(topics = "helloworld.t")
   public void receive(String payload) {
     log.info("received payload : {}", payload);
+    messages.add(payload);
     latch.countDown();
   }
 }
