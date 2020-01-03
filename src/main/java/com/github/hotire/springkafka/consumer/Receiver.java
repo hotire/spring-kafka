@@ -1,25 +1,28 @@
 package com.github.hotire.springkafka.consumer;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 
+@Getter
 @Slf4j
 public class Receiver {
 
   private final CountDownLatch latch;
+  private final List<Object> messages;
 
   public Receiver() {
     this.latch = new CountDownLatch(1);
+    this.messages = new ArrayList<>();
   }
 
-  public Receiver(CountDownLatch latch) {
+  public Receiver(CountDownLatch latch, List<Object> messages) {
     this.latch = latch;
-  }
-
-  public CountDownLatch getLatch() {
-    return latch;
+    this.messages = messages;
   }
 
   @KafkaListener(topics = "helloworld.t")
