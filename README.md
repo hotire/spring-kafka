@@ -33,3 +33,10 @@ topic를 나누는 단위
 ### Log
 1개의 메시지 
 
+### How to work
+
+- zookeeper가 kafka의 상태와 클러스터 관리를 해준다.
+
+- topic에 producer가 메세지를 발행해놓으면 consumer가 필요할때 해당 메세지를 가져가 소비한다.
+  (여기서 카프카로 발행된 메세지들은 consumer가 메세지를 소비한다고 해서 없어지는게 아니라 카프카 설정(default 7일)에 의해 삭제된다.)
+
