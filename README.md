@@ -5,7 +5,9 @@ study
 
 ### Getting Started 
 
-https://codenotfound.com/spring-kafka-consumer-producer-example.html
+- https://codenotfound.com/spring-kafka-consumer-producer-example.html
+
+- https://blog.naver.com/gngh0101/221763474986
 
 ## Core Concepts
 
