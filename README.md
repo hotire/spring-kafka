@@ -56,4 +56,5 @@ topic를 나누는 단위
 - Kafka : https://youtu.be/waw0XXNX-uQ?list=PL3Re5Ri5rZmkY46j6WcJXQYRlDRZSUQ1j
 - Topic : https://youtu.be/7QfEpRTRdIQ
 - Producer : https://www.youtube.com/watch?v=aAu0FE3nvbk
+- Consumer : https://youtu.be/rBVCvv9skT4?list=PL3Re5Ri5rZmkY46j6WcJXQYRlDRZSUQ1j
 - Consumer lag : https://youtu.be/D7C_CFjrzBk
