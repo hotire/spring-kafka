@@ -42,3 +42,15 @@ topic를 나누는 단위
 - topic에 producer가 메세지를 발행해놓으면 consumer가 필요할때 해당 메세지를 가져가 소비한다.
   (여기서 카프카로 발행된 메세지들은 consumer가 메세지를 소비한다고 해서 없어지는게 아니라 카프카 설정(default 7일)에 의해 삭제된다.)
 
+## Consumer
+
+### Lag
+프로듀서의 오프셋과 컨슈머의 오프셋간의 차이다. 
+
+파티션이 여러개면 당연히 Lag도 여러개다. 그 중 높은 숫자의 lag을 records-lag-max라고 부른다.
+
+
+
+### 영상들 
+
+- Consumer lag : https://youtu.be/D7C_CFjrzBk
