@@ -24,7 +24,7 @@ study
 브로커의 묶음
 
 ### Topic
-메시지 종류 
+메시지 종류, 데이터가 들어갈 수 있는 공간 
 
 ### Partitions
 topic를 나누는 단위 
@@ -53,4 +53,7 @@ topic를 나누는 단위
 
 ### 영상들 
 
+- Kafka : https://youtu.be/waw0XXNX-uQ?list=PL3Re5Ri5rZmkY46j6WcJXQYRlDRZSUQ1j
+- Topic : https://youtu.be/7QfEpRTRdIQ
+- Producer : https://www.youtube.com/watch?v=aAu0FE3nvbk
 - Consumer lag : https://youtu.be/D7C_CFjrzBk
