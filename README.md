@@ -50,6 +50,16 @@ topic를 나누는 단위
 파티션이 여러개면 당연히 Lag도 여러개다. 그 중 높은 숫자의 lag을 records-lag-max라고 부른다.
 
 
+## Config
+
+### Consumer 
+
+- request.timeout.ms : 요청에 대해 응답을 기다리는 최대 시간 (default: 305000)
+- max.poll.records: 단일 호출 poll()에 대해 최대 레코드 수를 조정. 이 옵션을 통해 app이 폴링 루프에서 데이터 양을 조정할 수 있음 (default: 500)
+
+
+
+
 
 ### 영상들 
 
