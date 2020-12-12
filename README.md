@@ -56,7 +56,7 @@ topic를 나누는 단위
 
 - request.timeout.ms : 요청에 대해 응답을 기다리는 최대 시간 (default: 305000)
 - max.poll.records: 단일 호출 poll()에 대해 최대 레코드 수를 조정. 이 옵션을 통해 app이 폴링 루프에서 데이터 양을 조정할 수 있음 (default: 500)
-
+- max.poll.interval.ms: 하트비트를 통해 살아는 있으나 실제 메세지를 가져가지 않을 경우. 주기적으로 poll을 호출하지 않으면 장애라고 판단하고 컨슈머 그룹에서 제외 (default: 300,000)
 
 
 
