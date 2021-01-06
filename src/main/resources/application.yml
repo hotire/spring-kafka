@@ -2,8 +2,8 @@
 spring:
   kafka:
     bootstrap-servers: localhost:9092
-    properties:
-      request.timeout.ms: 305000
-      max.poll.interval.ms: 300000
     consumer:
       max-poll-records: 500
+      properties:
+        request.timeout.ms: 305000
+        max.poll.interval.ms: 300000
