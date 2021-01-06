@@ -9,6 +9,10 @@ study
 
 - https://blog.naver.com/gngh0101/221763474986
 
+### Testing Kafka and Spring Boot
+
+- https://www.baeldung.com/spring-boot-kafka-testing
+
 ## Core Concepts
 
 ### Producer
