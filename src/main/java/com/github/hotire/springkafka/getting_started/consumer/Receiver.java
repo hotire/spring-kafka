@@ -1,12 +1,13 @@
-package com.github.hotire.springkafka.consumer;
-
+package com.github.hotire.springkafka.getting_started.consumer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+
+import org.springframework.kafka.annotation.KafkaListener;
+
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.annotation.KafkaListener;
 
 @Getter
 @Slf4j

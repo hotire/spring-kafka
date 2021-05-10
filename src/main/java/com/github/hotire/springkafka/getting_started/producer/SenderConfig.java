@@ -1,4 +1,4 @@
-package com.github.hotire.springkafka.producer;
+package com.github.hotire.springkafka.getting_started.producer;
 
 import java.util.Map;
 

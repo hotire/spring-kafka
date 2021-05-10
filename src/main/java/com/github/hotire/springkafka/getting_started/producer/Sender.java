@@ -1,9 +1,9 @@
-package com.github.hotire.springkafka.producer;
+package com.github.hotire.springkafka.getting_started.producer;
 
+import org.springframework.kafka.core.KafkaTemplate;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.core.KafkaTemplate;
 
 @Slf4j
 @RequiredArgsConstructor

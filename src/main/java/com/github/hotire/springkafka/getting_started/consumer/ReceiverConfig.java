@@ -1,4 +1,4 @@
-package com.github.hotire.springkafka.consumer;
+package com.github.hotire.springkafka.getting_started.consumer;
 
 import java.util.Map;
 

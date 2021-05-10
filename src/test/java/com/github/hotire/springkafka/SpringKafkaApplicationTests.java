@@ -2,19 +2,20 @@ package com.github.hotire.springkafka;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.github.hotire.springkafka.consumer.Receiver;
-import com.github.hotire.springkafka.producer.Sender;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 
+import com.github.hotire.springkafka.getting_started.consumer.Receiver;
+import com.github.hotire.springkafka.getting_started.producer.Sender;
+
 @DirtiesContext
 @EmbeddedKafka(partitions = 1,
-  topics = {SpringKafkaApplicationTests.HELLOWORLD_TOPIC})
+               topics = { SpringKafkaApplicationTests.HELLOWORLD_TOPIC })
 @SpringBootTest
 class SpringKafkaApplicationTests {
 
