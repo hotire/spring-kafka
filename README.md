@@ -76,6 +76,10 @@ https://github.com/reactor/reactor-kafka/tree/master/reactor-kafka-samples/src/m
 
 https://d2.naver.com/helloworld/6560422
 
+### KafkaConsumer Client Internals
+
+https://d2.naver.com/helloworld/0974525
+
 
 ## 영상들 
 
