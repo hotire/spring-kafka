@@ -63,6 +63,13 @@ topic를 나누는 단위
 - max.poll.interval.ms: 하트비트를 통해 살아는 있으나 실제 메세지를 가져가지 않을 경우. 주기적으로 poll을 호출하지 않으면 장애라고 판단하고 컨슈머 그룹에서 제외 (default: 300,000)
 
 
+## Reactive
+
+Reactor-Kafka
+https://projectreactor.io/docs/kafka/release/reference/
+
+Getting Started
+https://github.com/reactor/reactor-kafka/tree/master/reactor-kafka-samples/src/main/java/reactor/kafka/samples
 
 
 ### 영상들 
