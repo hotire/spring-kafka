@@ -65,14 +65,19 @@ topic를 나누는 단위
 
 ## Reactive
 
-Reactor-Kafka
+- Reactor-Kafka
 https://projectreactor.io/docs/kafka/release/reference/
 
-Getting Started
+- Getting Started
 https://github.com/reactor/reactor-kafka/tree/master/reactor-kafka-samples/src/main/java/reactor/kafka/samples
 
 
-### 영상들 
+## KafkaProducer Client Internals
+
+https://d2.naver.com/helloworld/6560422
+
+
+## 영상들 
 
 - Kafka : https://youtu.be/waw0XXNX-uQ?list=PL3Re5Ri5rZmkY46j6WcJXQYRlDRZSUQ1j
 - Topic : https://youtu.be/7QfEpRTRdIQ
