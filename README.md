@@ -31,10 +31,21 @@ study
 메시지 종류, 데이터가 들어갈 수 있는 공간 
 
 ### Partitions
-topic를 나누는 단위 
+topic를 나누는 단위, 메시지를 분산 저장한다. 
+
+Kafka는 topic의 Partition이라는 단위로 쪼개서 클러스터의 각 서버들에 분산되어 저장됩니다. 
+만약 고가용성을 위해서 복제 설정을 하게 되면 이것 또한 Partition 단위로 각 서버들에 분산되어 복제되고 장애가 발생하면 Partition 단위로 fail over가 수행됩니다.
+각 Partition은 0부터 1씩 증가하는 offset 값을 메시지에 부여하는데 이 값은 각 Partition내에서 메세지를 식별하는 ID로 사용되게 됩니다. offset 값은 Partition마다 별도로 관리되므로 topic 내에서 메시지를 식별할 때는 Partition 번호와 offset 값을 함께 사용합니다.
+
+3개의 Broker로 이루어진 Cluster에서는 하나의 topic이 3개의 Partition 형태로 분산되어 저장되게 됩니다.
+Producer가 메시지를 실제로 어떤 Partition으로 전송할지는 사용자가 구현한 Partition 분배 알고리즘에 의해 결정되게 되는데요.
+예를 들어 라운드로빈 방식으로 Partition 분배 알고리즘을 구현하여 각 Partition에 메시지를 균등하게 분배하도록 하거나 메시지의 키를 활용하여 알파벳 앞자리로 시작하는 키를 가진 메시지는 한곳에 넣는 방식으로 구성도 가능합니다.
+다른 적절하게 분배하는 방식에 대해서는 CRC32값을 Partition 수로 연산을 하여서 동일한 ID에 대한 메시지는 동일한 Partition에 할당되도록 구성도 가능합니다. 공식. CRC32(ID) % Partition 
 
 ### Offset
 파티션 내에서 각 메시자가 가지는 unique id
+
+실제 Offset과 Partition 번호가 같이 사용
 
 ### Log
 1개의 메시지 
@@ -76,9 +87,32 @@ https://github.com/reactor/reactor-kafka/tree/master/reactor-kafka-samples/src/m
 
 https://d2.naver.com/helloworld/6560422
 
-### KafkaConsumer Client Internals
+### KafkaProducer
+
+send()를 호출함으로써 Record를 전송한다.
+
+### RecordAccumulator
+
+사용자가 KafkaProducer의 send()를 호출하면 Record가 바로 Broker로 전송되는 것이 아니라 RecordAccumulator에 저장된다. 
+그리고 실제로 Broker에 전송되는 것은 이후에 비동기적으로 이루어진다.
+
+### Sender
+
+KafkaProducer는 별도의 Sender Thread를 생성한다. Sender Thread는 RecordAccumulator에 저장된 Record들을 Broker로 전송하는 역할을 한다. 
+
+그리고 Broker의 응답을 받아서 사용자가 Record 전송 시 설정한 콜백이 있으면 실행하고, Broker로부터 받은 응답 결과를 Future를 통해서 사용자에게 전달한다.
+
+
+## KafkaConsumer Client Internals
 
 https://d2.naver.com/helloworld/0974525
+
+
+## Issue
+https://saramin.github.io/2019-09-17-kafka/
+
+### Rebalancing
+https://joooootopia.tistory.com/30
 
 
 ## 영상들 
