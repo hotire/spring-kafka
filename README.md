@@ -64,6 +64,13 @@ Producer가 메시지를 실제로 어떤 Partition으로 전송할지는 사용
 
 파티션이 여러개면 당연히 Lag도 여러개다. 그 중 높은 숫자의 lag을 records-lag-max라고 부른다.
 
+## Consumer Group
+
+https://www.popit.kr/kafka-consumer-group/
+
+카프카에서는 하나의 파티션에 대해 컨슈머 그룹내 하나의 컨슈머 인스턴스만 접근할 수 있다. 
+-> 파티션에 대해 한명의 reader만 허용하여 데이터를 순서대로 읽어갈 수 있게 하기 위함(ordering 보장) 파티션 수보다 컨슈머 그룹의 인스턴스 수가 많을 수 없습니다.
+
 
 ## Config
 
