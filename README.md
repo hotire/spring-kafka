@@ -109,6 +109,10 @@ KafkaProducer는 별도의 Sender Thread를 생성한다. Sender Thread는 Recor
 
 그리고 Broker의 응답을 받아서 사용자가 Record 전송 시 설정한 콜백이 있으면 실행하고, Broker로부터 받은 응답 결과를 Future를 통해서 사용자에게 전달한다.
 
+### Serialization
+
+사용자로부터 전달된 Record의 Key, Value는 지정된 Serializer에 의해서 Byte Array로 변환된다. 
+Serializer는 key.serializer, value.serializer 설정값으로 지정하거나, KafkaProducer 생성 시 지정할 수 있다.
 
 ## KafkaConsumer Client Internals
 
