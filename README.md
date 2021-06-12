@@ -132,6 +132,18 @@ Record는 RecordAccumulator에 저장될 때 바로 압축되어 저장된다. c
 - snappy
 - lz4
 
+### RecordAccumulator append()
+
+사용자가 전송하려는 Record는 전송 전에 먼저 RecordAccumulator에 저장된다. 
+RecordAccumulator는 batches라는 Map을 가지고 있는데, 이 Map의 Key는 TopicPartition이고, Value는 Deque<RecordBatch>이다.
+
+~~~java
+private final ConcurrentMap<TopicPartition, Deque<ProducerBatch>> batches;
+~~~
+
+RecordAccumulator에 저장하기 전에 Record의 Serialized Size를 검사한다. 
+Serialized Size가 max.request.size 설정값 또는 buffer.memory 설정값보다 크면 RecordTooLargeException이 발생한다. 
+크기가 문제 없으면, RecordAccumulator의 append()를 이용해서 저장한다.
 
 ## KafkaConsumer Client Internals
 
