@@ -123,6 +123,16 @@ Record 생성 시 Partition 지정이 가능하기 때문에, Partition이 지�
 - Key 값이 있는 경우 Key 값의 Hash 값을 이용해서 Partition을 할당한다.
 - Key 값이 없는 경우 Round-Robin 방식으로 Partition이 할당된다.
 
+### Compression
+
+사용자가 전송하려는 Record는 압축을 함으로써 네트워크 전송 비용도 줄일 수 있고 저장 비용도 줄일 수 있다. 
+Record는 RecordAccumulator에 저장될 때 바로 압축되어 저장된다. compression.type을 설정하여 압축 시 사용할 코덱을 지정할 수 있다. 다음과 같은 코덱를 사용할 수 있으며 지정하지 않는 경우 기본값은 none이다.
+
+- gzip
+- snappy
+- lz4
+
+
 ## KafkaConsumer Client Internals
 
 https://d2.naver.com/helloworld/0974525
