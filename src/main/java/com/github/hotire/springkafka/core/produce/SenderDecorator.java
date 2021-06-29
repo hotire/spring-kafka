@@ -13,5 +13,9 @@ public class SenderDecorator implements Runnable {
     @Override
     public void run() {
         getDelegate().run();
+        // 1. run
+        // 2. runOnce
+        // 3. sendProducerData
+        // 4. accumulator.drain
     }
 }
