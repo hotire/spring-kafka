@@ -26,7 +26,7 @@ public class Receiver {
     this.messages = messages;
   }
 
-  @KafkaListener(topics = "helloworld.t")
+  @KafkaListener(topics = "helloworld.t", groupId = "test")
   public void receive(String payload) {
     log.info("received payload : {}", payload);
     messages.add(payload);

@@ -19,7 +19,7 @@ public class SenderConfig {
 
   @Bean
   public Map<String, Object> producerConfigs() {
-    return kafkaProperties.buildStreamsProperties();
+    return kafkaProperties.buildProducerProperties();
   }
 
   @Bean

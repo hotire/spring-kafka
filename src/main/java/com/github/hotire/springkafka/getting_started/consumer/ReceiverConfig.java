@@ -21,7 +21,7 @@ public class ReceiverConfig {
 
   @Bean
   public Map<String, Object> consumerConfigs() {
-    return kafkaProperties.buildStreamsProperties();
+    return kafkaProperties.buildConsumerProperties();
   }
 
   @Bean
