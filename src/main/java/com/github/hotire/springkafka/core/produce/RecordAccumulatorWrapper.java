@@ -13,8 +13,11 @@ import org.apache.kafka.common.Node;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.header.Header;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public class RecordAccumulatorWrapper {
-    private RecordAccumulator recordAccumulator;
+    private final RecordAccumulator recordAccumulator;
 
     public RecordAppendResult append(TopicPartition tp,
                                      long timestamp,
