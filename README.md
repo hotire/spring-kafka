@@ -157,10 +157,12 @@ https://saramin.github.io/2019-09-17-kafka/
 https://joooootopia.tistory.com/30
 
 
-## 영상들 
+## References
 
 - Kafka : https://youtu.be/waw0XXNX-uQ?list=PL3Re5Ri5rZmkY46j6WcJXQYRlDRZSUQ1j
 - Topic : https://youtu.be/7QfEpRTRdIQ
 - Producer : https://www.youtube.com/watch?v=aAu0FE3nvbk
 - Consumer : https://youtu.be/rBVCvv9skT4?list=PL3Re5Ri5rZmkY46j6WcJXQYRlDRZSUQ1j
 - Consumer lag : https://youtu.be/D7C_CFjrzBk
+
+- Kafka 이해하기 : https://medium.com/@umanking/%EC%B9%B4%ED%94%84%EC%B9%B4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%9D%B4%EC%95%BC%EA%B8%B0-%ED%95%98%EA%B8%B0%EC%A0%84%EC%97%90-%EB%A8%BC%EC%A0%80-data%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%9D%B4%EC%95%BC%EA%B8%B0%ED%95%B4%EB%B3%B4%EC%9E%90-d2e3ca2f3c2
