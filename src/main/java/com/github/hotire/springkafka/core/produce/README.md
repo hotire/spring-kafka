@@ -1,5 +1,8 @@
 # Kafka Produce 
 
+## Kafka Internal
+
+https://d2.naver.com/helloworld/6560422
 
 ## KafkaProducer
 
