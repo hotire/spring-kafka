@@ -12,7 +12,9 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Configuration
 @RequiredArgsConstructor
 public class ReceiverConfig {
@@ -32,9 +34,9 @@ public class ReceiverConfig {
   @Bean
   public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
     ConcurrentKafkaListenerContainerFactory<String, String> factory =
-      new ConcurrentKafkaListenerContainerFactory<>();
+            new ConcurrentKafkaListenerContainerFactory<>();
     factory.setConsumerFactory(consumerFactory());
-
+    factory.setErrorHandler((error, data) -> log.error("error : {}, data : {}", error.getMessage(), data, error));
     return factory;
   }
 
