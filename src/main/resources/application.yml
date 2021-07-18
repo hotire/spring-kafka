@@ -2,6 +2,7 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
+      enable-auto-commit: false
       max-poll-records: 500
       properties:
         request.timeout.ms: 305000
