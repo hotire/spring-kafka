@@ -10,6 +10,11 @@ import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
+import org.springframework.kafka.listener.ContainerProperties;
+import org.springframework.kafka.listener.ContainerProperties.AckMode;
+import org.springframework.retry.backoff.ExponentialBackOffPolicy;
+import org.springframework.retry.policy.SimpleRetryPolicy;
+import org.springframework.retry.support.RetryTemplate;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,8 +40,17 @@ public class ReceiverConfig {
   public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
     ConcurrentKafkaListenerContainerFactory<String, String> factory =
             new ConcurrentKafkaListenerContainerFactory<>();
+    ContainerProperties props = factory.getContainerProperties();
+    props.setAckMode(AckMode.MANUAL_IMMEDIATE);
     factory.setConsumerFactory(consumerFactory());
     factory.setErrorHandler((error, data) -> log.error("error : {}, data : {}", error.getMessage(), data, error));
+    RetryTemplate retryTemplate = new RetryTemplate();
+    ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
+    backOffPolicy.setInitialInterval(1000L);
+    backOffPolicy.setMaxInterval(1000L);
+    retryTemplate.setBackOffPolicy(backOffPolicy);
+    retryTemplate.setRetryPolicy(new SimpleRetryPolicy(2));
+    factory.setRetryTemplate(retryTemplate);
     return factory;
   }
 

@@ -31,3 +31,12 @@ Auto commit에서 중복발생
 6) 다시가져온 record를 처리 수행(중복발생)
 
 - https://blog.voidmainvoid.net/262
+
+
+
+### AckMode
+
+- MANUAL - 마지막 폴의 모든 결과가 처리되었을 때 ack가 큐에 대기되고 오프셋이 한 작업으로 커밋됩니다.
+- MANUAL_IMMEDIATE - 리스너 스레드에서 ack가 수행되는 한 오프셋이 즉시 커밋됩니다(동기화 또는 비동기화).
+- https://docs.spring.io/spring-kafka/reference/html/#committing-offsets
+
