@@ -51,9 +51,11 @@ public class RecordAccumulatorWrapper {
         ProducerBatch last = deque.peekLast();
         if (last != null) {
             FutureRecordMetadata future = last.tryAppend(timestamp, key, value, headers, callback, time.milliseconds());
-            if (future == null) last.closeForRecordAppends();
-            else
+            if (future == null) {
+                last.closeForRecordAppends();
+            } else {
                 return new RecordAppendResult(future, deque.size() > 1 || last.isFull(), false);
+            }
         }
         return null;
     }

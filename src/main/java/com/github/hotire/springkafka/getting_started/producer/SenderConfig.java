@@ -15,25 +15,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SenderConfig {
 
-  private final KafkaProperties kafkaProperties;
+    private final KafkaProperties kafkaProperties;
 
-  @Bean
-  public Map<String, Object> producerConfigs() {
-    return kafkaProperties.buildProducerProperties();
-  }
+    @Bean
+    public Map<String, Object> producerConfigs() {
+        return kafkaProperties.buildProducerProperties();
+    }
 
-  @Bean
-  public ProducerFactory<String, String> producerFactory() {
-    return new DefaultKafkaProducerFactory<>(producerConfigs());
-  }
+    @Bean
+    public ProducerFactory<String, String> producerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfigs());
+    }
 
-  @Bean
-  public KafkaTemplate<String, String> kafkaTemplate() {
-    return new KafkaTemplate<>(producerFactory());
-  }
+    @Bean
+    public KafkaTemplate<String, String> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
 
-  @Bean
-  public Sender sender() {
-    return new Sender(kafkaTemplate());
-  }
+    @Bean
+    public Sender sender() {
+        return new Sender(kafkaTemplate());
+    }
 }

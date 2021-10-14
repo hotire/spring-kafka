@@ -21,23 +21,23 @@ import com.github.hotire.springkafka.getting_started.producer.Sender;
 @SpringBootTest
 class SpringKafkaApplicationTests {
 
-  static final String HELLOWORLD_TOPIC = "helloworld.t";
+    static final String HELLOWORLD_TOPIC = "helloworld.t";
 
-  @Autowired
-  private Receiver receiver;
+    @Autowired
+    private Receiver receiver;
 
-  @Autowired
-  private Sender sender;
+    @Autowired
+    private Sender sender;
 
-  @Test
-  void testReceive() throws Exception {
-    final String message = "Hello Spring Kafka!";
-    sender.send(message);
-    receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
-    receiver.getLatch().await();
-    assertThat(receiver.getLatch().getCount()).isEqualTo(0);
+    @Test
+    void testReceive() throws Exception {
+        final String message = "Hello Spring Kafka!";
+        sender.send(message);
+        receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
+        receiver.getLatch().await();
+        assertThat(receiver.getLatch().getCount()).isEqualTo(0);
 //    assertThat(receiver.getMessages()).contains(message);
-    Thread.sleep(4000L);
-  }
+        Thread.sleep(4000L);
+    }
 
 }

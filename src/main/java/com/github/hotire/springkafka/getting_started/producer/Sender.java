@@ -8,10 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class Sender {
-  private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
-  public void send(final String payload) {
-    log.info("sending payload : {}", payload);
-    kafkaTemplate.send("helloworld.t", payload);
-  }
+    public void send(final String payload) {
+        log.info("sending payload : {}", payload);
+        kafkaTemplate.send("helloworld.t", payload);
+    }
 }
