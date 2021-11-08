@@ -7,3 +7,11 @@ spring:
       properties:
         request.timeout.ms: 305000
         max.poll.interval.ms: 300000
+
+
+application:
+  kafka:
+    topics:
+      helloworld: helloworld.t
+    group:
+      helloworld: hello

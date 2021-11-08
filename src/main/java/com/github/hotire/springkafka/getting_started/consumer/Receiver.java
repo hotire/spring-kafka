@@ -38,7 +38,7 @@ public class Receiver {
         acknowledgment.acknowledge();
     }
 
-    @KafkaListener(topics = "helloworld.t", groupId = "test2")
+    @KafkaListener(topics = "${application.kafka.topics.helloworld}", groupId = "${application.kafka.group.helloworld}-2")
     public void receive2(ConsumerRecord<String, String> payload, Acknowledgment acknowledgment) {
         log.info("received2 payload : {}", payload);
         if (1 == 1) {
