@@ -45,7 +45,7 @@ public class ReceiverConfig {
         props.setAckMode(AckMode.MANUAL_IMMEDIATE);
         factory.setConsumerFactory(consumerFactory());
 //        factory.setErrorHandler((error, data) -> log.error("error : {}, data : {}", error.getMessage(), data, error));
-        factory.setErrorHandler(new SeekToCurrentErrorHandler());
+//        factory.setErrorHandler(new SeekToCurrentErrorHandler());
         RetryTemplate retryTemplate = new RetryTemplate();
         ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
         backOffPolicy.setInitialInterval(1000L);
