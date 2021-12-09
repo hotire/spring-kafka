@@ -3,7 +3,15 @@
 
 https://docs.spring.io/spring-kafka/reference/html/#error-handlers
 
-기본으로 설정하지 않으면 null
+기본으로 설정하지 않으면 LoggingErrorHandler
+
+- KafkaMessageListenerContainer.ListenerConsumer 기본 전략 
+~~~
+protected ErrorHandler determineErrorHandler(GenericErrorHandler<?> errHandler) {
+			return errHandler != null ? (ErrorHandler) errHandler
+					: this.transactionManager != null ? null : new LoggingErrorHandler();
+		}
+~~~
 
 
 ## SeekToCurrentErrorHandler
