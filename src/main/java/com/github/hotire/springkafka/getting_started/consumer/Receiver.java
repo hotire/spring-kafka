@@ -39,8 +39,10 @@ public class Receiver {
     }
 
     @KafkaListener(topics = "${application.kafka.topics.helloworld}", groupId = "${application.kafka.group.helloworld}-2")
-    public void receive2(ConsumerRecord<String, String> payload, Acknowledgment acknowledgment) {
+    public void receive2(ConsumerRecord<String, String> payload, Acknowledgment acknowledgment) throws InterruptedException {
         log.info("received2 payload : {}", payload);
+
+        Thread.sleep(1000L);
         if (1 == 1) {
             throw new SkippableException("hello");
         }

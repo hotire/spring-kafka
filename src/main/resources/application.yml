@@ -6,7 +6,7 @@ spring:
       max-poll-records: 500
       properties:
         request.timeout.ms: 305000
-        max.poll.interval.ms: 300000
+        max.poll.interval.ms: 100000
 
 
 application:

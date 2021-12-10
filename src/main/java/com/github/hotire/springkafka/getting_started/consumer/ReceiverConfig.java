@@ -16,6 +16,7 @@ import org.springframework.kafka.listener.SeekToCurrentErrorHandler;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
+import org.springframework.util.backoff.FixedBackOff;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +46,7 @@ public class ReceiverConfig {
         props.setAckMode(AckMode.MANUAL_IMMEDIATE);
         factory.setConsumerFactory(consumerFactory());
 //        factory.setErrorHandler((error, data) -> log.error("error : {}, data : {}", error.getMessage(), data, error));
-//        factory.setErrorHandler(new SeekToCurrentErrorHandler());
+        factory.setErrorHandler(new SeekToCurrentErrorHandler(new FixedBackOff(0,  1)));
         RetryTemplate retryTemplate = new RetryTemplate();
         ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
         backOffPolicy.setInitialInterval(1000L);
