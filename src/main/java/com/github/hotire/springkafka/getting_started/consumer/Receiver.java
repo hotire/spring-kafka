@@ -30,6 +30,14 @@ public class Receiver {
         this.messages = messages;
     }
 
+    @KafkaListener(topics = "wordcount-output", groupId = "test")
+    public void receiveWordCount(ConsumerRecord<String, String> payload, Acknowledgment acknowledgment) {
+        log.info("received payload : {}", payload);
+        messages.add(payload);
+        latch.countDown();
+        acknowledgment.acknowledge();
+    }
+
     @KafkaListener(topics = "helloworld.t", groupId = "test")
     public void receive(ConsumerRecord<String, String> payload, Acknowledgment acknowledgment) {
         log.info("received payload : {}", payload);
