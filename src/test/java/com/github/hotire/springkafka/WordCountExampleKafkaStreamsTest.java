@@ -1,5 +1,6 @@
 package com.github.hotire.springkafka;
 
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -56,9 +57,15 @@ class WordCountExampleKafkaStreamsTest {
         final KStream<String, String> source = builder.stream(INPUT_TOPIC);
 
         final Pattern pattern = Pattern.compile("\\W+");
-        KStream<String, String> counts = source.flatMapValues(value -> Arrays.asList(pattern.split(value.toLowerCase())))
+        KStream<String, String> counts = source.flatMapValues(value -> {
+            log.info("value : {}", value);
+            return Arrays.asList(pattern.split(value.toLowerCase()));
+        })
                                                .map((key, value) -> {
-                                                   log.info("key :{}, value : {}",key, value);
+                                                   log.info("key :{}, value : {}", key, value);
+                                                   if (1 == 1) {
+                                                       throw new RuntimeException("helloException : " + key + value);
+                                                   }
                                                    return new KeyValue<>(value, value);
                                                })
                                                .filter((key, value) -> (!value.equals("the")))
@@ -70,6 +77,12 @@ class WordCountExampleKafkaStreamsTest {
 
         try (KafkaStreams streams = new KafkaStreams(builder.build(), props)) {
             // This is for reset to work. Don't use in production - it causes the app to re-load the state from Kafka on every start
+            streams.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+                @Override
+                public void uncaughtException(Thread t, Throwable e) {
+                    log.error(e.getMessage(), e);
+                }
+            });
             streams.cleanUp();
 
             streams.start();
