@@ -57,11 +57,10 @@ public class ReceiverConfig {
         factory.setErrorHandler(new SeekToCurrentErrorHandler(new BiConsumer<ConsumerRecord<?, ?>, Exception>() {
             @Override
             public void accept(ConsumerRecord<?, ?> consumerRecord, Exception e) {
-                System.out.println(e);
+                log.error(e.getMessage(), e);
             }
         }, new FixedBackOff(0, 10)));
         factory.setRecoveryCallback((RecoveryCallback<Exception>) retryContext -> {
-            System.out.println();
             KafkaException kafkaException = (KafkaException) retryContext.getLastThrowable();
             if (kafkaException.contains(SkippableException.class)) {
                 retryContext.getAttribute(RetryingMessageListenerAdapter.CONTEXT_RECORD);
