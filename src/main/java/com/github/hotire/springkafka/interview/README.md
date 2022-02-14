@@ -23,12 +23,18 @@ Serialization, Partitioning, Compression 작업이 이루어지고 RecordAccumul
 gzip, snappy, lz4
 
     
-    
-
-
-
-
 ### RecordAccumulator
+
+전송할 record, 전송 완료후 콜백을 지정해서 send를 호출하면 
+
+Serialization, Partitioning, Compression 작업이 이루어지고 RecordAccumulator에 Record가 저장된다.
+
+RecordAccumulator batches라는 Map을 가지고 있는데, 이 Map의 Key는 TopicPartition이고, Value는 Deque<RecordBatch>이다.
+
+- Deque 구현체는 ArrayDeque이다. 
+: cache 지역성이 더 좋다. 고정된 크기를 사용하는 batches 에서 배열의 단점인 공간 비효율, 배열 재배치가 일어날수 없다. 
+
+
 
 ### Sender
 
