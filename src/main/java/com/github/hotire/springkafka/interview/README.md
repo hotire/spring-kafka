@@ -19,7 +19,10 @@ Serialization, Partitioning, Compression 작업이 이루어지고 RecordAccumul
 지정하지 않으면 DefaultPartitioner가 사용됩니다. (Partitioner는 기본적으로 Record를 받아서 Partition Number를 반환하는 역할을 한다.)
     - Key 값이 있는 경우 Key 값의 Hash 값을 이용해서 Partition을 할당한다.
     - Key 값이 없는 경우 Round-Robin 방식으로 Partition이 할당된다.
--     
+- Compression : Record는 압축을 함으로써 네트워크 전송 비용도 줄일 수 있고 저장 비용도 줄일 수 있다. Record는 RecordAccumulator에 저장될 때 바로 압축되어 저장된다. 기본전략은 none
+gzip, snappy, lz4
+
+    
     
 
 
