@@ -14,8 +14,8 @@ class CustomRecordAccumulatorTest {
         final TopicPartition topicPartition = new TopicPartition("hotire", 0);
         final CustomRecordAccumulator accumulator = new CustomRecordAccumulator(new ConcurrentHashMap<>());
 
+        // no assert
         accumulator.getBatches().put(topicPartition, new ArrayDeque<>());
-
         accumulator.getBatches().get(topicPartition).getFirst();
         accumulator.getBatches().get(topicPartition).getLast();
     }
