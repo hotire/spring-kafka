@@ -1,7 +1,9 @@
 package com.github.hotire.springkafka.interview;
 
+import java.util.List;
 import java.util.Set;
 
+import org.apache.kafka.clients.producer.internals.ProducerBatch;
 import org.apache.kafka.common.Cluster;
 
 /**
@@ -15,5 +17,12 @@ public class SenderCore {
      */
     private long sendProducerData(long now) {
         return now;
+    }
+
+    /**
+     * @see org.apache.kafka.clients.producer.internals.Sender#sendProduceRequest(long, int, short, int, List)
+     */
+    private void sendProduceRequest(long now, int destination, short acks, int timeout, List<ProducerBatch> batches) {
+
     }
 }
