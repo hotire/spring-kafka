@@ -4,12 +4,20 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.kafka.clients.producer.internals.ProducerBatch;
+import org.apache.kafka.clients.producer.internals.Sender;
 import org.apache.kafka.common.Cluster;
 
 /**
  * @see org.apache.kafka.clients.producer.internals.Sender
  */
 public class SenderCore {
+
+    /**
+     * @see Sender#runOnce()
+     */
+    void runOnce() {
+
+    }
 
     /**
      * @see org.apache.kafka.clients.producer.internals.Sender#sendProducerData(long)
