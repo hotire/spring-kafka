@@ -52,3 +52,9 @@ drain()에서는 먼저 각 Broker Node에 속하는 TopicPartition 목록을 �
 this.ioThread = new KafkaThread(ioThreadName, this.sender, true);
 this.ioThread.start();
 ~~~
+
+
+## Kafka Transaction
+
+- https://gunju-ko.github.io/kafka/spring-kafka/2018/03/31/Spring-KafkaTransaction.html
+- https://bestugi.tistory.com/44

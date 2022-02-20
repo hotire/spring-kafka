@@ -5,6 +5,8 @@ import org.apache.kafka.common.requests.AbstractRequest;
 
 /**
  * @see org.apache.kafka.clients.InFlightRequests
+ *
+ * 전송되었거나 전송 중이지만 아직 응답을 받지 못한 요청 
  */
 public class InFlightRequestsCore {
 
