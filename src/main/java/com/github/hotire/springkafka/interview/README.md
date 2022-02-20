@@ -38,3 +38,12 @@ RecordAccumulator batches라는 Map을 가지고 있는데, 이 Map의 Key는 To
 
 ### Sender
 
+- maxRequestSize;
+
+
+### KafkaProducer
+
+~~~java
+this.ioThread = new KafkaThread(ioThreadName, this.sender, true);
+this.ioThread.start();
+~~~
