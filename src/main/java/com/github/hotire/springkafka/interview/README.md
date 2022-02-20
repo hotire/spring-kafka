@@ -35,6 +35,11 @@ RecordAccumulator batches라는 Map을 가지고 있는데, 이 Map의 Key는 To
 : cache 지역성이 더 좋다. 고정된 크기를 사용하는 batches 에서 배열의 단점인 공간 비효율, 배열 재배치가 일어날수 없다. 
 
 
+- Drain : 
+drain()에서는 먼저 각 Broker Node에 속하는 TopicPartition 목록을 얻어온다. 그리고 각 Node에 속한 TopicPartition을 보면서 Deque First쪽의 RecordBatch 하나를 꺼내서 RecordBatch List에 추가한다. 이렇게 Node 단위로 RecordBatch List가 max.request.size 설정값을 넘지 않을 때까지 모은다. 
+모든 Node에 이 동작을 반복하면 Node별로 전송할 RecordBatch List가 모인다.
+
+
 
 ### Sender
 
