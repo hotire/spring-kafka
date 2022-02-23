@@ -18,7 +18,11 @@ Kafka는 Distributed Streaming Platform 분산 스트리밍 플랫폼
 
 브로커에게 담당 파티션을 할당하고 모니터링한다. 
 
- 
+### 리더 
+
+각 파티션은 한 브로커가 소유하며 그 브로커를 리더라고 한다. 
+
+같은 파티션이 여러 브로커에 지정될 수 있고 파티션이 복제된다. (장애 방지)
 
 
 
@@ -64,7 +68,17 @@ drain()에서는 먼저 각 Broker Node에 속하는 TopicPartition 목록을 �
 
 ### Sender
 
-- maxRequestSize;
+- maxRequestSize : sender 에서 recordAccumulator로 부터 해당 크기 만큼 drain한다. 
+
+ProduceRequest는 InFlightRequests라는 Node별 Deque에 먼저 저장된다.
+
+
+### InFlightRequests
+
+- max.in.flight.requests.per.connection : KafkaProducer Client가 하나의 Broker로 동시에 전송할 수 있는 요청 수를 의미한다.
+
+Broker는 하나의 Connection에 대해서 요청이 들어온 순서대로 처리해서 응답한다. 
+응답의 순서가 보장되기 때문에, KafkaProducer Client는 Broker로부터 응답이 오면 항상 InFlightRequests Deque의 가장 오래된 요청을 완료 처리한다.
 
 
 ### KafkaProducer
