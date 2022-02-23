@@ -1,6 +1,13 @@
 # Kafka
 
-Kafka는 Distributed Streaming Platform
+Kafka는 Distributed Streaming Platform 분산 스트리밍 플랫폼 
+
+### Broker
+
+하나의 카프카 서버를 브로커라고 한다. 
+
+브로커는 프로듀서로부터 메시지를 수신하고 오프셋을 지정한 후 해당 메시지를 디스크에 저장한다. 또한 컨슈머의 파티션 읽기 요청에 응답하고 디스크에 수록된 메시지를 전송한다. 
+
 
 ## KafkaProducer Client Internals
 
