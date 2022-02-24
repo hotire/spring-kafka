@@ -46,7 +46,7 @@ public class Receiver {
         acknowledgment.acknowledge();
     }
 
-    @KafkaListener(topics = "${application.kafka.topics.helloworld}", groupId = "${application.kafka.group.helloworld}-2")
+    @KafkaListener(topics = "${application.kafka.topics.helloworld}", groupId = "${application.kafka.group.helloworld}-2", id = "receive2-group-id")
     public void receive2(ConsumerRecord<String, String> payload, Acknowledgment acknowledgment) throws InterruptedException {
         log.info("received2 payload : {}", payload);
 

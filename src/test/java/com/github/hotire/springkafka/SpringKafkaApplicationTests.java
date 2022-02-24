@@ -32,7 +32,7 @@ class SpringKafkaApplicationTests {
     @Test
     void testReceive() throws Exception {
         final String message = "Hello Spring Kafka!";
-        sender.send(message);
+//        sender.send(message);
         sender.send(message);
         receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
         receiver.getLatch().await();

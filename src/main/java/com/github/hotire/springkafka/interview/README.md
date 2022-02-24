@@ -25,8 +25,6 @@ Kafka는 Distributed Streaming Platform 분산 스트리밍 플랫폼
 같은 파티션이 여러 브로커에 지정될 수 있고 파티션이 복제된다. (장애 방지)
 
 
-
-
 ## KafkaProducer Client Internals
 
 https://d2.naver.com/helloworld/6560422
@@ -80,7 +78,6 @@ ProduceRequest는 InFlightRequests라는 Node별 Deque에 먼저 저장된다.
 Broker는 하나의 Connection에 대해서 요청이 들어온 순서대로 처리해서 응답한다. 
 응답의 순서가 보장되기 때문에, KafkaProducer Client는 Broker로부터 응답이 오면 항상 InFlightRequests Deque의 가장 오래된 요청을 완료 처리한다.
 
-
 ### KafkaProducer
 
 ~~~java
@@ -88,6 +85,13 @@ this.ioThread = new KafkaThread(ioThreadName, this.sender, true);
 this.ioThread.start();
 ~~~
 
+### KafkaTemplate
+
+- SettableListenableFuture
+
+### ProducerFactory
+
+TODO...
 
 ## Kafka Transaction
 
