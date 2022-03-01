@@ -70,6 +70,7 @@ public class ReceiverConfig {
             if (kafkaException.contains(SkippableException.class)) {
                 final ConsumerRecord<?, ?> record = (ConsumerRecord<?, ?>) retryContext.getAttribute(RetryingMessageListenerAdapter.CONTEXT_RECORD);
                 Object ack = retryContext.getAttribute(RetryingMessageListenerAdapter.CONTEXT_ACKNOWLEDGMENT);
+                Object consumer = retryContext.getAttribute(RetryingMessageListenerAdapter.CONTEXT_CONSUMER);
                 if (ack instanceof Acknowledgment) {
                     ((Acknowledgment) ack).acknowledge();
                 }
@@ -77,7 +78,6 @@ public class ReceiverConfig {
                 final String topic = record.topic();
                 final String groupId = KafkaUtils.getConsumerGroupId();
                 String result = postProcessor.getIdByTopic().get(topic + groupId);
-                System.out.println("id " + result);
                 return kafkaException;
             } else {
                 log.info("retry exception");
@@ -88,20 +88,16 @@ public class ReceiverConfig {
         ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
         backOffPolicy.setInitialInterval(1000L);
         backOffPolicy.setMaxInterval(1000L);
-//        new BinaryExceptionClassifierRetryPolicy(exceptionClassifier);
         retryTemplate.setBackOffPolicy(backOffPolicy);
         retryTemplate.setRetryPolicy(new SimpleRetryPolicy(4));
-//        factory.setRetryTemplate(retryTemplate);
-//        factory.setStatefulRetry(true);
-        RetryTemplateBuilder builder = RetryTemplate
+
+        final RetryTemplateBuilder builder = RetryTemplate
                 .builder()
                 .exponentialBackoff(1000, ExponentialBackOffPolicy.DEFAULT_MULTIPLIER, 1001)
                 .maxAttempts(3);
         builder.notRetryOn(IOException.class);
         factory.setRetryTemplate(builder.traversingCauses().build());
-//                .apply { skipExceptions.forEach { notRetryOn(it) } }
-//                .traversingCauses()
-//                .build()
+
         return factory;
     }
 
