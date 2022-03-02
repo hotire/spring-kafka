@@ -6,6 +6,12 @@ Kafka는 Distributed Streaming Platform 분산 스트리밍 플랫폼
 
 이러한 특징 덕분에 Kafka는 기존 메시징 시스템(Active MQ, Rabbit MQ)을 대체하기도 하고 시스템 로그를 모으거나 데이터 가공을 위해 파이프라인을 구성할 때 등 다양한 경우에 사용된다. 
 
+Kafka는 TCP 위에서 동작하는 자체 바이너리 프로토콜을 사용하고, 모든 바이너리 프로토콜은 요청과 응답의 쌍으로 구성된다. 
+
+바이너리 프로토콜을 적절히 구현한 프로듀서(KafkaProducer)와 컨슈머(KafkaConsumer)를 클라이언트로 제공하며 
+
+KafkaProducer를 사용하여 데이터를 발행(publish)하고 KafkaConsumer를 사용하여 데이터를 구독(subscribe)한다. 
+
 
 ### Broker
 
