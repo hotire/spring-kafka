@@ -1,4 +1,4 @@
-package com.github.hotire.springkafka.interview;
+package com.github.hotire.springkafka.interview.producer;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;

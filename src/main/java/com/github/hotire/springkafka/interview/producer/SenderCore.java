@@ -1,4 +1,4 @@
-package com.github.hotire.springkafka.interview;
+package com.github.hotire.springkafka.interview.producer;
 
 import java.util.List;
 import java.util.Set;
