@@ -112,4 +112,8 @@ TODO...
 
 ## Consumer  
 
-https://d2.naver.com/helloworld/0853669
+https://d2.naver.com/helloworld/0974525
+
+### GroupCoordinator
+
+브로커 중 하나가 컨슈머 그룹를 관리하고 이를 GroupCoordinator라고 부른다. GroupCoordinator는 그룹의 메타데이터와 그룹을 관리한다.
