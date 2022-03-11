@@ -12,7 +12,6 @@ Kafka는 TCP 위에서 동작하는 자체 바이너리 프로토콜을 사용�
 
 KafkaProducer를 사용하여 데이터를 발행(publish)하고 KafkaConsumer를 사용하여 데이터를 구독(subscribe)한다. 
 
-
 ### Broker
 
 하나의 카프카 서버를 브로커라고 한다. 
@@ -29,12 +28,11 @@ KafkaProducer를 사용하여 데이터를 발행(publish)하고 KafkaConsumer�
 
 브로커에게 담당 파티션을 할당하고 모니터링한다. 
 
-### 리더 
+### 리더 (파티션 리더)
 
 각 파티션은 한 브로커가 소유하며 그 브로커를 리더라고 한다. 
 
 같은 파티션이 여러 브로커에 지정될 수 있고 파티션이 복제된다. (장애 방지)
-
 
 ## KafkaProducer Client Internals
 
@@ -120,6 +118,21 @@ KafkaConsumer는 사용자가 직접 사용하는 클래스로, 사용자는 Kaf
 
 - poll : 컨슈머 그룹에 참여한 후 브로커로부터 데이터를 가져온다.  (subscribe : group.id 전달하면 구독한다.)
 
+내부 구성 요소로 ConsumerNetworkClient, SubscriptionState, ConsumerCoordinator, Fetcher, HeartBeat로 구성된다. 
+
+### Consumer Group
+
+같은 group.id를 사용하는 컨슈머를 묶어서 컨슈머 그룹이라고 한다. 레코드(record)는 컨슈머 그룹 내에 오직 1개의 컨슈머로만 전달된다.
+
+### Consumer Group Leader 
+
+
+### ConsumerNetworkClient
+
+ConsumerNetworkClient는 KafkaConsumer의 모든 네트워크 통신을 담당하는 클래스로 비동기로 처리하고 
+
+RequestFuture로 결과를 반환한다. 
+
 
 
 ### GroupCoordinator
@@ -140,3 +153,6 @@ Kafka는 리밸런스(rebalance)를 통해 컨슈머의 할당된 파티션을 �
 
 2. 두 번째 단계에서 모든 컨슈머는 SyncGroup 요청을 보낸다. 리더는 SyncGroup 요청을 보낼 때 파티션 할당 결과를 요청에 포함시킨다. GroupCoordinator는 파티션 할당 결과를 SyncGroup의 응답으로 준다
 
+- 리밸런스 원인 
+    1. 컨슈머 그룹에 새로운 컨슈머가 추가되거나 컨슈머 그룹에 속해 있던 컨슈머가 제외되는 경우
+    2. 만약 컨슈머 그룹 내에 특정 컨슈머의 처리가 일정 시간(max.poll.interval.ms 설정만큼) 정지할 경우 제외
