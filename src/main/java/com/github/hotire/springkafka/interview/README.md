@@ -114,6 +114,12 @@ TODO...
 
 https://d2.naver.com/helloworld/0974525
 
+### KafkaConsumer
+
+KafkaConsumer는 사용자가 직접 사용하는 클래스로, 사용자는 KafkaConsumer의 poll 메서드를 사용해 브로커에서 데이터를 가져올 수 있다.
+
+- poll : 컨슈머 그룹에 참여한 후 브로커로부터 데이터를 가져온다. 
+
 ### GroupCoordinator
 
 브로커 중 하나가 컨슈머 그룹를 관리하고 이를 GroupCoordinator라고 부른다. GroupCoordinator는 그룹의 메타데이터와 그룹을 관리한다.
