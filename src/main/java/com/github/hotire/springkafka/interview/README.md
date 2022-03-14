@@ -110,7 +110,7 @@ TODO...
 
 ## Consumer  
 
-https://d2.naver.com/helloworld/0974525
+# https://d2.naver.com/helloworld/0974525
 
 ### KafkaConsumer
 
