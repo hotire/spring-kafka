@@ -11,10 +11,12 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.apache.kafka.clients.ClientRequest;
 import org.apache.kafka.clients.ClientResponse;
+import org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.PollCondition;
 import org.apache.kafka.clients.consumer.internals.RequestFuture;
 import org.apache.kafka.common.Node;
 import org.apache.kafka.common.requests.AbstractRequest;
 import org.apache.kafka.common.requests.AbstractRequest.Builder;
+import org.apache.kafka.common.utils.Timer;
 
 /**
  * @see org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient
@@ -29,7 +31,19 @@ public class ConsumerNetworkClientCore {
     public RequestFuture<ClientResponse> send(Node node,
                                               AbstractRequest.Builder<?> requestBuilder,
                                               int requestTimeoutMs) {
+//        RequestFutureCompletionHandler completionHandler = new RequestFutureCompletionHandler();
+//        ClientRequest clientRequest = client.newClientRequest(node.idString(), requestBuilder, now, true,
+//                                                              requestTimeoutMs, completionHandler);
+//        unsent.put(node, clientRequest);
+
         return new RequestFuture<>();
+    }
+
+    /**
+     * @see org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient#poll(Timer, PollCondition, boolean)
+     */
+    public void poll(Timer timer, PollCondition pollCondition, boolean disableWakeup) {
+        // trySend
     }
 
     private final static class UnsentRequests {
