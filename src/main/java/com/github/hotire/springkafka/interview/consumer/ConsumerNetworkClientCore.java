@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.apache.kafka.clients.ClientRequest;
 import org.apache.kafka.clients.ClientResponse;
+import org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient;
 import org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.PollCondition;
 import org.apache.kafka.clients.consumer.internals.RequestFuture;
 import org.apache.kafka.common.Node;
@@ -24,6 +25,7 @@ import org.apache.kafka.common.utils.Timer;
 public class ConsumerNetworkClientCore {
 
     private final UnsentRequests unsent = new UnsentRequests();
+    private final ConcurrentLinkedQueue<RequestFutureCompletionHandlerCore> pendingCompletion = new ConcurrentLinkedQueue<>();
 
     /**
      * @see org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient#send(Node, Builder, int)
@@ -31,11 +33,6 @@ public class ConsumerNetworkClientCore {
     public RequestFuture<ClientResponse> send(Node node,
                                               AbstractRequest.Builder<?> requestBuilder,
                                               int requestTimeoutMs) {
-//        RequestFutureCompletionHandler completionHandler = new RequestFutureCompletionHandler();
-//        ClientRequest clientRequest = client.newClientRequest(node.idString(), requestBuilder, now, true,
-//                                                              requestTimeoutMs, completionHandler);
-//        unsent.put(node, clientRequest);
-
         return new RequestFuture<>();
     }
 
@@ -43,10 +40,23 @@ public class ConsumerNetworkClientCore {
      * @see org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient#poll(Timer, PollCondition, boolean)
      */
     public void poll(Timer timer, PollCondition pollCondition, boolean disableWakeup) {
+        firePendingCompletedRequests();
         // trySend
     }
 
-    private final static class UnsentRequests {
+    /**
+     * @see ConsumerNetworkClient#firePendingCompletedRequests()
+     */
+    private void firePendingCompletedRequests() {
+        for (; ; ) {
+            RequestFutureCompletionHandlerCore completionHandler = pendingCompletion.poll();
+            if (completionHandler == null) {
+                break;
+            }
+        }
+    }
+
+    private static final class UnsentRequests {
         private final ConcurrentMap<Node, ConcurrentLinkedQueue<ClientRequest>> unsent;
 
         private UnsentRequests() {
