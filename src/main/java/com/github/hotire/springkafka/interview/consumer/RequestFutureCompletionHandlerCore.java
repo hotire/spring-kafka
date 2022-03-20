@@ -9,10 +9,17 @@ import org.apache.kafka.clients.RequestCompletionHandler;
 class RequestFutureCompletionHandlerCore implements RequestCompletionHandler {
 
     /**
-     * @see org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.RequestFutureCompletionHandler#onComplete(ClientResponse) 
+     * @see org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.RequestFutureCompletionHandler#onComplete(ClientResponse)
      */
     @Override
     public void onComplete(ClientResponse response) {
-        
+
+    }
+
+    /**
+     * @see org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.RequestFutureCompletionHandler#onFailure(RuntimeException)
+     */
+    public void onFailure(RuntimeException e) {
+
     }
 }
