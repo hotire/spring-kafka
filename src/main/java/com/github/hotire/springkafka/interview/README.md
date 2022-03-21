@@ -110,7 +110,7 @@ TODO...
 
 ## Consumer  
 
-# https://d2.naver.com/helloworld/0974525
+https://d2.naver.com/helloworld/0974525
 
 ### Consumer Group
 
@@ -159,3 +159,18 @@ Kafka는 리밸런스(rebalance)를 통해 컨슈머의 할당된 파티션을 �
 - 리밸런스 원인 
     1. 컨슈머 그룹에 새로운 컨슈머가 추가되거나 컨슈머 그룹에 속해 있던 컨슈머가 제외되는 경우
     2. 만약 컨슈머 그룹 내에 특정 컨슈머의 처리가 일정 시간(max.poll.interval.ms 설정만큼) 정지할 경우 제외
+    
+    
+## NetworkClient
+
+- sender
+    - sender.runOnce -> sendProducerData(client.send) / client.poll
+- client
+    1. send
+    2. doSend
+    3. InFlightRequest 생성하고 selector로 전달 
+    4. poll
+    5. handleCompletedReceives
+
+
+    
