@@ -112,6 +112,12 @@ TODO...
 
 # https://d2.naver.com/helloworld/0974525
 
+### Consumer Group
+
+같은 group.id를 사용하는 컨슈머를 묶어서 컨슈머 그룹이라고 한다. 레코드(record)는 컨슈머 그룹 내에 오직 1개의 컨슈머로만 전달된다.
+
+### Consumer Group Leader 
+
 ### KafkaConsumer
 
 KafkaConsumer는 사용자가 직접 사용하는 클래스로, 사용자는 KafkaConsumer의 poll 메서드를 사용해 브로커에서 데이터를 가져올 수 있다.
@@ -120,19 +126,16 @@ KafkaConsumer는 사용자가 직접 사용하는 클래스로, 사용자는 Kaf
 
 내부 구성 요소로 ConsumerNetworkClient, SubscriptionState, ConsumerCoordinator, Fetcher, HeartBeat로 구성된다. 
 
-### Consumer Group
-
-같은 group.id를 사용하는 컨슈머를 묶어서 컨슈머 그룹이라고 한다. 레코드(record)는 컨슈머 그룹 내에 오직 1개의 컨슈머로만 전달된다.
-
-### Consumer Group Leader 
-
-
 ### ConsumerNetworkClient
 
 ConsumerNetworkClient는 KafkaConsumer의 모든 네트워크 통신을 담당하는 클래스로 비동기로 처리하고 
 
 RequestFuture로 결과를 반환한다. 
 
+- Unsent Map 에 먼저 저장한다. 
+- RequestFutureCompletionHandler로 success / fail 시에 pendingCompletion 들어갈 수 있도록 한다. 
+- 매번 poll 호출시 pendingCompletion 체크해서 전부 처리한다. 
+- 매번 poll 호출시 Unsent 전송한다 . 
 
 
 ### GroupCoordinator
