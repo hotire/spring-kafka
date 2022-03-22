@@ -5,6 +5,7 @@ import org.apache.kafka.clients.consumer.internals.RequestFutureAdapter;
 
 /**
  * @see org.apache.kafka.clients.consumer.internals.RequestFutureAdapter
+ * @see RequestFuture#compose(RequestFutureAdapter)
  */
 public class RequestFutureAdapterCore<F, T> extends RequestFutureAdapter<F, T> {
 
