@@ -203,6 +203,7 @@ GroupCoordinator는 그룹이 구독한 토픽과 파티션을 관리하고 그�
 FindCoordinator API를 통해 찾을 수 있다. https://kafka.apache.org/protocol#The_Messages_FindCoordinator
 
 1. Join : KafkaConsumer가 GroupCoordinator에게 그룹 참여를 요청하는 단계이다. GroupCoordinator를 찾은 ConsumerCoordinator는 JoinGroup API를 사용하여 GroupCoordinator에게 그룹 참여를 요청한다.
+JoinGroup API 요청을 보내기 전에 Heartbeat 스레드가 JoinGroup을 방해하지 못하도록 Heartbeat 스레드를 일시 정지시킨다.
 
     
     
