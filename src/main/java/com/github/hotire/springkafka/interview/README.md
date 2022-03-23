@@ -137,6 +137,29 @@ RequestFuture로 결과를 반환한다.
 - 매번 poll 호출시 pendingCompletion 체크해서 전부 처리한다. 
 - 매번 poll 호출시 Unsent 전송한다 . 
 
+### SubscriptionState
+
+KafkaConsumer는 다른 메시지 시스템과 달리 자신이 소비하는 토픽, 파티션, 오프셋 정보를 추적 및 관리한다. 
+
+SubscriptionState가 토픽, 파티션, 오프셋 정보 관리를 담당하고 있다.
+
+토픽, 파티션 할당은 assign 메서드를 통해 이루어진다. 컨슈머의 그룹 관리 기능을 사용하지 않고 사용자가 assign 메서드를 직접 호출하여 수동으로 토픽, 파티션을 할당할 수 있는데 이 경우에는 컨슈머 리밸런스가 일어나지 않는다.
+
+assign 메서드를 통해 할당된 파티션은 초기 오프셋 값 설정이 필요하다. 
+
+초기 오프셋 값이 없으면 Fetch가 불가능한 파티션으로 분류된다. 
+
+seek 메서드를 통해 초기 오프셋 값을 설정한다. 초기 오프셋 설정은 오프셋 초기화 과정을 통해 이루어진다. 사용자가 KafkaConsumer의 seek 메서드를 사용하여 설정할 수도 있다.
+
+
+반면 컨슈머의 그룹 관리 기능을 사용하기 위해서는 특정 토픽에 대해 구독 요청을 해야 한다. 
+
+구독 요청은 KafkaConsumer의 subscribe 메서드를 통해 한다. 
+
+사용자가 구독을 요청한 토픽 정보는 SubscriptionState의 subscription에 저장된다. 
+
+subscription에 저장된 토픽 정보는 컨슈머 리밸런스 과정에서 사용된다. 그룹 관리 기능을 사용한 경우에는 컨슈머 리밸런스 과정에서 코디네이터에 의해 토픽, 파티션이 할당된다.
+
 
 ### GroupCoordinator
 
