@@ -160,6 +160,19 @@ seek 메서드를 통해 초기 오프셋 값을 설정한다. 초기 오프셋 
 
 subscription에 저장된 토픽 정보는 컨슈머 리밸런스 과정에서 사용된다. 그룹 관리 기능을 사용한 경우에는 컨슈머 리밸런스 과정에서 코디네이터에 의해 토픽, 파티션이 할당된다.
 
+### ConsumerCoordinator
+
+ConsumerCoordinator는 컨슈머 리밸런스, 오프셋 초기화(일부), 오프셋 커밋을 담당한다.
+
+- 컨슈머 리밸런스 : JoinGroupResponseHandler, SyncGroupResponseHandler
+
+- 오프셋 초기화 : OffsetFetchResponseHandler
+
+- 오프셋 커밋 : OffsetCommitResponseHandler
+
+- Heartbeat : HeartbeatResponseHandler
+
+
 
 ### GroupCoordinator
 
