@@ -195,6 +195,15 @@ Kafka는 리밸런스(rebalance)를 통해 컨슈머의 할당된 파티션을 �
 - 리밸런스 원인 
     1. 컨슈머 그룹에 새로운 컨슈머가 추가되거나 컨슈머 그룹에 속해 있던 컨슈머가 제외되는 경우
     2. 만약 컨슈머 그룹 내에 특정 컨슈머의 처리가 일정 시간(max.poll.interval.ms 설정만큼) 정지할 경우 제외
+
+### GroupCoordinator 찾기
+
+GroupCoordinator는 그룹이 구독한 토픽과 파티션을 관리하고 그룹의 멤버를 관리한다. 따라서 KafkaConsumer가 그룹 참여를 요청하기 위해서는 먼저 GroupCoordinator를 찾아야 한다.
+
+FindCoordinator API를 통해 찾을 수 있다. https://kafka.apache.org/protocol#The_Messages_FindCoordinator
+
+1. Join : KafkaConsumer가 GroupCoordinator에게 그룹 참여를 요청하는 단계이다. GroupCoordinator를 찾은 ConsumerCoordinator는 JoinGroup API를 사용하여 GroupCoordinator에게 그룹 참여를 요청한다.
+
     
     
 ## NetworkClient
