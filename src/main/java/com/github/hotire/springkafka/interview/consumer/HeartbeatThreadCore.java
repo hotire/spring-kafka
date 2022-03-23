@@ -12,4 +12,18 @@ public class HeartbeatThreadCore extends KafkaThread {
     public HeartbeatThreadCore(String groupId) {
         super(HEARTBEAT_THREAD_PREFIX + (groupId.isEmpty() ? "" : " | " + groupId), true);
     }
+
+    /**
+     * @see org.apache.kafka.clients.consumer.internals.AbstractCoordinator.HeartbeatThread#enable()
+     */
+    public void enable() {
+
+    }
+
+    /**
+     * @see org.apache.kafka.clients.consumer.internals.AbstractCoordinator.HeartbeatThread#disable()
+     */
+    public void disable() {
+
+    }
 }
