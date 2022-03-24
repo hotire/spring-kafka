@@ -212,6 +212,8 @@ memberid와 leaderid가 같은 컨슈머가 리더가 되며, 리더는 그룹 �
     - rebalanceTimeout: 그룹에 속한 컨슈머들은 리밸런스가 발생했을 때 rebalanceTimeout 이내에 JoinGroup 요청을 보내야 한다. rebalanceTimeout 이내에 JoinGroup 요청을 보내지 않은 컨슈머는 컨슈머 그룹에서 제외된다.
     - groupProtocols: 메타데이터로 컨슈머가 구독하려는 토픽과 컨슈머가 지원하는 파티션 할당 정책이 포함된다. (기본값은 RangeAssignor) 
     - partition.assignment.strategy : RangeAssignor, RoundRobinAssignor, StickyAssignor 외에도 custom이 가능 
+        - RangeAssignor : 파티션은 숫자 순서대로 정렬을 하고 컨슈머는 사전 순서 정렬이후, 토픽의 파티션을 컨슈머 숫자로 나누어 컨슈머에게 할당해야 하는 파티션 수를 결정한다. 나누어지지 않으면 앞쪽 컨슈머가 더 할당 가져간다. 
+        - 
 2. Sync 
     
     
