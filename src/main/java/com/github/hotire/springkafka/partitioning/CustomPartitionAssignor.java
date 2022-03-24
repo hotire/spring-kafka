@@ -7,6 +7,7 @@ import org.apache.kafka.clients.consumer.internals.PartitionAssignor;
 import org.apache.kafka.common.Cluster;
 
 /**
+ * @see org.apache.kafka.clients.consumer.ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG
  * @see org.apache.kafka.clients.consumer.internals.AbstractPartitionAssignor
  * @see org.apache.kafka.clients.consumer.RangeAssignor
  * @see org.apache.kafka.clients.consumer.RoundRobinAssignor
