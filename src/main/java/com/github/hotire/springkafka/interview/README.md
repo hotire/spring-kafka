@@ -204,7 +204,15 @@ FindCoordinator API를 통해 찾을 수 있다. https://kafka.apache.org/protoc
 
 1. Join : KafkaConsumer가 GroupCoordinator에게 그룹 참여를 요청하는 단계이다. GroupCoordinator를 찾은 ConsumerCoordinator는 JoinGroup API를 사용하여 GroupCoordinator에게 그룹 참여를 요청한다.
 JoinGroup API 요청을 보내기 전에 Heartbeat 스레드가 JoinGroup을 방해하지 못하도록 Heartbeat 스레드를 일시 정지시킨다.
-
+JoinGroup API 요청에는 groupId, sessionTimeout, rebalanceTimeout, groupProtocols이 포함된다.
+GroupCoordinator는 응답으로 현재 컨슈머의 Id(memberid)와 그룹 리더의 Id(leaderid), 그룹 멤버 정보(members), 그룹 파티션 할당 정책(group_protocol) 보낸다.  
+memberid와 leaderid가 같은 컨슈머가 리더가 되며, 리더는 그룹 내에 파티션을 할당할 책임이 있다.   
+    - groupId: 컨슈머가 속할 그룹을 나타낸다.
+    - sessionTimeout: 컨슈머가 sessionTimeout 시간 내에 heartbeat 요청을 GroupCoordinator에 보내지 않으면 GroupCoordinator는 해당 컨슈머가 죽은 것으로 판단한다
+    - rebalanceTimeout: 그룹에 속한 컨슈머들은 리밸런스가 발생했을 때 rebalanceTimeout 이내에 JoinGroup 요청을 보내야 한다. rebalanceTimeout 이내에 JoinGroup 요청을 보내지 않은 컨슈머는 컨슈머 그룹에서 제외된다.
+    - groupProtocols: 메타데이터로 컨슈머가 구독하려는 토픽과 컨슈머가 지원하는 파티션 할당 정책이 포함된다. (기본값은 RangeAssignor) 
+    - partition.assignment.strategy : RangeAssignor, RoundRobinAssignor, StickyAssignor 외에도 custom이 가능 
+2. Sync 
     
     
 ## NetworkClient
