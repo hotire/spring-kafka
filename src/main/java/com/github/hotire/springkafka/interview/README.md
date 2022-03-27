@@ -233,6 +233,13 @@ GroupCoordinator는 SyncGroup API 응답으로 컨슈머에 할당된 토픽, �
 ConsumerCoordinator는 OffsetFetch API를 통해 GroupCoordinator에게 커밋된 오프셋 정보를 요청하고 응답 받으면 SubscriptionState 업데이트한다.
 이후 SubscriptionState 오프셋 값은  Fetcher에 의해 파티션의 오프셋 초기값으로 설정된다
 
+### 파티션의 오프셋 가져오기
+
+만약 커밋된 오프셋 정보가 없다면 KafkaConsumer는 auto.offset.reset 설정에 따라 오프셋을 초기화한다. auto.offset.reset에는 earliest, latest, none을 설정할 수 있다. 
+
+- earliest: 파티션의 가장 처음 오프셋을 사용한다.
+- latest: 파티션의 가장 마지막 오프셋을 사용한다. (기본 값)
+- none: 오프셋을 초기화하지 않는다. 
  
  
     
