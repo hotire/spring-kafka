@@ -244,6 +244,15 @@ ConsumerCoordinator는 OffsetFetch API를 통해 GroupCoordinator에게 커밋�
 Fetcher는 파티션의 가장 처음 오프셋과 가장 마지막 오프셋을 알아내기 위해 특정 시간(timestamp)에 해당하는 오프셋을 조회하는 ListOffsets API를 활용하여 파티션 리더 브로커로 ListOffsets API 요청에 timestamp를 -2로 설정하면 가장 처음 오프셋을 알 수 있고 timestamp를 -1로 설정하면 가장 마지막 오프셋을 알 수 있다. auto.offset.reset가 earliest인 경우에는 ListOffsets API 요청에 timestamp를 -2로 설정하고 latest인 경우에는 timestamp를 -1로 설정한다.
 응답받은 오프셋 값은 SubscriptionState의 seek 메서드를 통해 파티션의 초기 오프셋으로 설정된다(그림 11의 14).
  
+ 
+### 오프셋 커밋
+
+컨슈머가 오프셋 정보를 관리하기 때문에 데이터를 읽은 후 컨슈머는 적절한 시점에 오프셋을 커밋해야 한다.
+
+- enable.auto.commit 설정이 true인 경우 KafkaConsumer가 auto.commit.interval.ms마다 오프셋을 자동으로 커밋한다. enable.auto.commit의 기본값은 true이고 auto.commit.interval.ms의 기본값은 5000ms(5초)이다.
+- 수동 커밋(commitSync) : commitSync 메서드를 사용하여 오프셋 커밋을 요청하면 KafkaConsumer가 오프셋 커밋 요청이 끝날 때까지 대기하기 때문에 KafkaConsumer가 일시 중지된다. 만약 이를 방지하고 싶다면 commitAsync 메서드를 사용하여 비동기 커밋을 해야 한다. GroupCoordinator는 OffsetCommit API의 응답으로 오류 코드(error_code)를 보내는데 오류 코드가 0이면 정상이다.
+ 
+ 
     
 ## NetworkClient
 
