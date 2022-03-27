@@ -214,9 +214,16 @@ memberid와 leaderid가 같은 컨슈머가 리더가 되며, 리더는 그룹 �
     - partition.assignment.strategy : RangeAssignor, RoundRobinAssignor, StickyAssignor 외에도 custom이 가능 
         - RangeAssignor : 파티션은 숫자 순서대로 정렬을 하고 컨슈머는 사전 순서 정렬이후, 토픽의 파티션을 컨슈머 숫자로 나누어 컨슈머에게 할당해야 하는 파티션 수를 결정한다. 나누어지지 않으면 앞쪽 컨슈머가 더 할당 가져간다. 
         - RoundRobinAssignor : 모든 파티션을 컨슈머에게 번갈아가면서 할당한다.
-       
-2. Sync 
+        - StickyAssignor : 최대한 파티션을 균등하게 분배하고, 파티션 재할당이 이루어질 때 파티션의 이동을 최소화하려는 할당 정책이다. 
+2. Sync : 그룹에 참여하는 모든 컨슈머는 SyncGroup API 요청을 GroupCoordinator에 보내고 리더는 파티션 할당 결과를 SyncGroup API 요청에 포함시킨다.
+GroupCoordinator는 SyncGroup API 응답으로 컨슈머에 할당된 토픽, 파티션 정보를 보낸다
+    - SyncGroup API 응답을 받은 컨슈머는 자신에게 할당된 토픽, 파티션 정보를 SubscriptionState의 assign 메서드를 사용하여 업데이트한다.
+    - 최신 버전에서는 컨슈머 리밸런스 과정에서 KafkaConsumer 처리가 정지되는 Stop the world 현상을 없애기 위해 컨슈머 리밸런스 과정을 증분으로 진행하는 기능이 추가되었다.
+
+
     
+    
+ 
     
 ## NetworkClient
 
