@@ -240,7 +240,9 @@ ConsumerCoordinator는 OffsetFetch API를 통해 GroupCoordinator에게 커밋�
 - earliest: 파티션의 가장 처음 오프셋을 사용한다.
 - latest: 파티션의 가장 마지막 오프셋을 사용한다. (기본 값)
 - none: 오프셋을 초기화하지 않는다. 
- 
+
+Fetcher는 파티션의 가장 처음 오프셋과 가장 마지막 오프셋을 알아내기 위해 특정 시간(timestamp)에 해당하는 오프셋을 조회하는 ListOffsets API를 활용하여 파티션 리더 브로커로 ListOffsets API 요청에 timestamp를 -2로 설정하면 가장 처음 오프셋을 알 수 있고 timestamp를 -1로 설정하면 가장 마지막 오프셋을 알 수 있다. auto.offset.reset가 earliest인 경우에는 ListOffsets API 요청에 timestamp를 -2로 설정하고 latest인 경우에는 timestamp를 -1로 설정한다.
+응답받은 오프셋 값은 SubscriptionState의 seek 메서드를 통해 파티션의 초기 오프셋으로 설정된다(그림 11의 14).
  
     
 ## NetworkClient
