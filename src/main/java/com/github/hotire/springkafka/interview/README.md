@@ -221,8 +221,19 @@ GroupCoordinator는 SyncGroup API 응답으로 컨슈머에 할당된 토픽, �
     - 최신 버전에서는 컨슈머 리밸런스 과정에서 KafkaConsumer 처리가 정지되는 Stop the world 현상을 없애기 위해 컨슈머 리밸런스 과정을 증분으로 진행하는 기능이 추가되었다.
 
 
+### 오프셋 초기화
+
+브로커에서 데이터를 읽기 위해서는 파티션의 초기 오프셋 값이 필요하다. SubscriptionState의 assign 메서드를 통해 할당된 파티션은 초기 오프셋 값이 없다. KafkaConsumer는 오프셋 초기화 과정을 통해 초기 오프셋 값을 설정한다.    
     
-    
+커밋된 오프셋을 가져오는 과정과 커밋된 오프셋이 없는 경우 오프셋 초기화 정책에 따라 오프셋을 초기화하기 위해 파티션의 오프셋을 가져오는 과정으로 이루어진다.
+
+### 커밋된 오프셋 가져오기
+
+초기 오프셋 값이 없는 경우 KafkaConsumer는 ConsumerCoordinator를 통해 커밋된 오프셋 값을 확인한다. 
+ConsumerCoordinator는 OffsetFetch API를 통해 GroupCoordinator에게 커밋된 오프셋 정보를 요청하고 응답 받으면 SubscriptionState 업데이트한다.
+이후 SubscriptionState 오프셋 값은  Fetcher에 의해 파티션의 오프셋 초기값으로 설정된다
+
+ 
  
     
 ## NetworkClient
