@@ -252,7 +252,16 @@ Fetcher는 파티션의 가장 처음 오프셋과 가장 마지막 오프셋을
 - enable.auto.commit 설정이 true인 경우 KafkaConsumer가 auto.commit.interval.ms마다 오프셋을 자동으로 커밋한다. enable.auto.commit의 기본값은 true이고 auto.commit.interval.ms의 기본값은 5000ms(5초)이다.
 - 수동 커밋(commitSync) : commitSync 메서드를 사용하여 오프셋 커밋을 요청하면 KafkaConsumer가 오프셋 커밋 요청이 끝날 때까지 대기하기 때문에 KafkaConsumer가 일시 중지된다. 만약 이를 방지하고 싶다면 commitAsync 메서드를 사용하여 비동기 커밋을 해야 한다. GroupCoordinator는 OffsetCommit API의 응답으로 오류 코드(error_code)를 보내는데 오류 코드가 0이면 정상이다.
  
- 
+### HeartBeat
+
+0.10.1 이전에는 HeartBeat 시간(Consumer가 중단되진 않았는지 GroupCoordinator가 감시하는 시간)과 Polling 간격 시간(브로커로부터 가져온 데이터를 처리하는 시간)이 구분되지 않아서 싱글 스레드로 KafkaConsumer을 사용할 때 Polling 간격이 session timout을 초과하면 컨슈머 그룹에서 제외되는 문제가 있었다. 또한 데이터 처리 시간이 항상 session timout보다 긴 경우에는 사용자가 문제를 인지하고 수정하기 전까지는 프로세스가 진행되지 않는 문제가 있었다. 
+    
+- max.poll.interval.ms : poll 메서드는 max.poll.interval.ms 이내에 호출되어야 한다. 호출되지 않으면 컨슈머 그룹에서 제외하고 리밸런스가 일어난다. (기본값은 300000ms(5분))
+- heartbeat.interval.ms : Heartbeat 전송 시간 간격이다. HeartBeat 스레드는 heartbeat.interval.ms 간격으로 Heartbeat을 전송한다. heartbeat.interval.ms의 값은 항상 session.timeout.ms보다 작아야 하며 일반적으로 session.timeout.ms의 1/3 이하로 설정한다. ( 3000ms(3초)
+- session.timeout.ms : session.timeout.ms 내에 HeartBeat이 도착하지 않으면 브로커는 해당 컨슈머를 그룹에서 제거한다. (10000ms(10초)이다.)
+
+Process 스레드가 정상적으로 동작하지 않는다면 max.poll.interval.ms으로 감지가 된다. 만약 KafkaConsumer가 정상이 아닌 경우에는 session.timeout.ms로 감지된다.
+
     
 ## NetworkClient
 
