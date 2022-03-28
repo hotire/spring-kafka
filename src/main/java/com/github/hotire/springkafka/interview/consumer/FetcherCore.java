@@ -20,4 +20,11 @@ public class FetcherCore<K, V> {
     public Map<TopicPartition, List<ConsumerRecord<K, V>>> fetchedRecords() {
         return Collections.emptyMap();
     }
+
+    /**
+     * @see Fetcher#sendFetches()
+     */
+    public synchronized int sendFetches() {
+        return 0;
+    }
 }

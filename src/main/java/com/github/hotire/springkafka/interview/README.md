@@ -269,8 +269,9 @@ Consumer 리밸런스와 오프셋 초기화 과정이 끝나면 KafkaConsumer�
 
 KafkaConsumer의 poll 메서드가 호출되면 먼저 Fetcher의 fetchedRecords 메서드가 호출된다. 
 
-fetchedRecords 메서드는 내부 캐시인 nextInLineRecords와 completedFetches를 확인하여 브로커로부터 이미 가져온 데이터가 있는 경우에는 max.poll.records 설정 값만큼 레코드를 반환한다. max.poll.records의 기본값은 500이다.
 
+- fetchedRecords : 내부 캐시인 nextInLineRecords와 completedFetches를 확인하여 브로커로부터 이미 가져온 데이터가 있는 경우에는 max.poll.records 설정 값만큼 레코드를 반환한다. max.poll.records의 기본값은 500이다.
+- sendFetches :  파티션 리더가 위치한 각 브로커에게 보낸다. KafkaConsumer는 Fetcher가 브로커로부터 응답을 받을 때까지 대기한다.
 
 
 
