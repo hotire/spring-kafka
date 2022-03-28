@@ -265,7 +265,13 @@ Process 스레드가 정상적으로 동작하지 않는다면 max.poll.interval
 
 ### Fetcher
 
-Fetcher는 브로커로부터 데이터를 가져오는 역할을 담당하는 클래스이다.
+Consumer 리밸런스와 오프셋 초기화 과정이 끝나면 KafkaConsumer의 poll 메서드를 통해 브로커로부터 데이터를 가져오는 역할을 한다. 
+
+KafkaConsumer의 poll 메서드가 호출되면 먼저 Fetcher의 fetchedRecords 메서드가 호출된다. 
+
+fetchedRecords 메서드는 내부 캐시인 nextInLineRecords와 completedFetches를 확인하여 브로커로부터 이미 가져온 데이터가 있는 경우에는 max.poll.records 설정 값만큼 레코드를 반환한다. max.poll.records의 기본값은 500이다.
+
+
 
 
     
