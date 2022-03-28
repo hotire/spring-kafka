@@ -272,7 +272,14 @@ KafkaConsumer의 poll 메서드가 호출되면 먼저 Fetcher의 fetchedRecords
 
 - fetchedRecords : 내부 캐시인 nextInLineRecords와 completedFetches를 확인하여 브로커로부터 이미 가져온 데이터가 있는 경우에는 max.poll.records 설정 값만큼 레코드를 반환한다. max.poll.records의 기본값은 500이다.
 - sendFetches :  파티션 리더가 위치한 각 브로커에게 보낸다. KafkaConsumer는 Fetcher가 브로커로부터 응답을 받을 때까지 대기한다.
+    - fetch.max.wait.ms : 브로커가 Fetch API 요청을 받았을 때 fetch.min.bytes 값만큼 데이터가 없는 경우 응답을 주기까지 최대로 기다릴 시간이다. (기본 값 500ms(0.5초))
+    - fetch.min.bytes : Fetch API 요청이 왔을 때 브로커는 최소한 fetch.min.bytes 값만큼 데이터를 반환한다. 데이터가 충분하지 못하면 데이터가 누적되길 기다린다. 기본 값은 1
+    - fetch.max.bytes : Fetch API 요청에 대해 브로커가 반환해야 하는 최대 데이터 크기로 절대적으로 적용되지 않고 첫 번째 파티션의 첫 번째 메시지가 이 값보다 크다면 컨슈머가 계속 진행될 수 있도록 데이터가 반환된다. (기본값은 52428800(50MiB)이다.)
+    - max.partition.fetch.bytes : 브로커가 반환할 파티션당 최대 데이터 크기로, fetch.max.bytes 와 마찬가지로 이상이라도 반환한다. 
 
+Fetcher가 브로커로부터 응답을 받으면 KafkaConsumer는 Fetcher의 fetchedRecords 메서드를 다시 호출하여 사용자에게 반환할 레코드를 가져온다. 
+
+KafkaConsumer는 레코드를 사용자에게 반환하기 전에 다음 poll 메서드 호출 시에 브로커로부터 응답을 대기하는 시간을 없애기 위해 Fetcher의 sendFetches 메서드를 호출한 후 레코드를 반환한다.    
 
 
     
