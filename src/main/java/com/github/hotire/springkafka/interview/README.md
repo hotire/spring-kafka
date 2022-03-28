@@ -262,6 +262,12 @@ Fetcher는 파티션의 가장 처음 오프셋과 가장 마지막 오프셋을
 
 Process 스레드가 정상적으로 동작하지 않는다면 max.poll.interval.ms으로 감지가 된다. 만약 KafkaConsumer가 정상이 아닌 경우에는 session.timeout.ms로 감지된다.
 
+
+### Fetcher
+
+Fetcher는 브로커로부터 데이터를 가져오는 역할을 담당하는 클래스이다.
+
+
     
 ## NetworkClient
 
