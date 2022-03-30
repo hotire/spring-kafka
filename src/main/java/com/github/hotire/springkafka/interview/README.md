@@ -287,6 +287,14 @@ KafkaConsumer는 레코드를 사용자에게 반환하기 전에 다음 poll �
 
 https://d2.naver.com/helloworld/0853669
 
+Kafka 클라이언트인 KafkaProducer와 KafkaConsumer는 브로커 노드와 통신하기 위한 클래스.
+
+
+### ClusterConnectionStates
+
+NetworkClient는 브로커와의 연결 상태를 ClusterConnectionStates로 관리한다.
+
+
 ### Request 과정 
 
 - sender
