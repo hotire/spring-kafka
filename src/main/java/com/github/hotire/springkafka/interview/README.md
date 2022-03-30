@@ -294,6 +294,10 @@ Kafka 클라이언트인 KafkaProducer와 KafkaConsumer는 브로커 노드와 �
 
 NetworkClient는 브로커와의 연결 상태를 ClusterConnectionStates로 관리한다.
 
+### NodeConnectionState
+
+현재 연결 상태를 나타내는 ConnectionState와 마지막으로 연결을 시도했던 시간 정보가 기록된다.
+
 
 ### Request 과정 
 
