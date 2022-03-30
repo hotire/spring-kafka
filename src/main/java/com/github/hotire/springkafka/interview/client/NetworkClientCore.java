@@ -1,4 +1,4 @@
-package com.github.hotire.springkafka.interview;
+package com.github.hotire.springkafka.interview.client;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.kafka.clients.ClientResponse;
 
 /**
+ * @see org.apache.kafka.clients.KafkaClient
  * @see org.apache.kafka.clients.NetworkClient
  */
 public class NetworkClientCore {
