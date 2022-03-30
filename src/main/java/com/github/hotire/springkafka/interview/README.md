@@ -285,6 +285,10 @@ KafkaConsumer는 레코드를 사용자에게 반환하기 전에 다음 poll �
     
 ## NetworkClient
 
+https://d2.naver.com/helloworld/0853669
+
+### Request 과정 
+
 - sender
     - sender.runOnce -> sendProducerData(client.send) / client.poll
 - client
