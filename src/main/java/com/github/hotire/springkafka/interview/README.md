@@ -298,6 +298,17 @@ NetworkClient는 브로커와의 연결 상태를 ClusterConnectionStates로 관
 
 현재 연결 상태를 나타내는 ConnectionState와 마지막으로 연결을 시도했던 시간 정보가 기록된다.
 
+### ConnectionState
+
+- DISCONNECTED: 브로커와 연결이 끊긴 상태
+- CONNECTING : 소켓을 생성하고 연결을 생성 중인 상태
+- CHECKING_API_VERSIONS	: 연결이 생성되었고 브로커와 API 버전이 호환되는지 확인 중인 상태
+- READY	: 브로커로 요청을 전송할 수 있는 상태
+
+CONNECTING -> CHECKING_API_VERSIONS -> READY
+
+만약 각 연결 단계에서 문제가 발생한다면 DISCONNECTED 상태로 바뀌고 브로커와 통신하기 위해 다시 연결을 시도한다.
+
 
 ### Request 과정 
 
