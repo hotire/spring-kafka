@@ -346,6 +346,14 @@ API가 문제없이 호환된다면 브로커의 연결 상태는 READY 상태�
 
 불필요한 연결을 정리하기 위해 IdleExpiryManager를 사용한다. READY 상태로 통신할 준비가 되어 있는 브로커 연결을 일정 시간 동안 사용하지 않으면 IdleExpiryManager에 의해 연결이 정리될 수 있다.
 
+특정 SocketChannel에 어떤 이벤트가 처리되었을 때 그 시간을 기록해 두며, 이 시간을 기준으로 브로커 연결을 LRU(Least Recently Used) 알고리즘으로 관리한다.
+
+Selector에서 이벤트 처리마다 connections.max.idle.ms 설정값만큼 지났는지 확인하고 정리한다. 
+
+만약 가장 오래된 연결이 이 시간 동안 아무 일도 하지 않았다면 연결을 닫고 관련 객체들을 정리한다. 
+
+이 설정의 기본값은 '540000'으로, 9분 동안 아무 이벤트가 없었다면 연결이 정리된다. 만약 이 값을 음수로 지정하면 IdleExpiryManager를 생성하지 않으며 관련 동작도 수행하지 않는다.
+
 ### Request 과정 
 
 - sender
