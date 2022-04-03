@@ -342,6 +342,10 @@ Kafka 클라이언트는 자신의 API 버전 정보를 담은 ApiVersionRequest
 API가 문제없이 호환된다면 브로커의 연결 상태는 READY 상태가 된다.
 
 
+### IdleExpiryManager
+
+불필요한 연결을 정리하기 위해 IdleExpiryManager를 사용한다. READY 상태로 통신할 준비가 되어 있는 브로커 연결을 일정 시간 동안 사용하지 않으면 IdleExpiryManager에 의해 연결이 정리될 수 있다.
+
 ### Request 과정 
 
 - sender
