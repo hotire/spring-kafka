@@ -321,7 +321,17 @@ Kafka 클라이언트와 브로커 노드의 연결이 끊긴 상태로 브로�
 - 요청이 전송되고 응답을 기다리다가 타임아웃이 발생한 경우
 - 일정 시간 동안 브로커로 새로운 요청을 보내지 않은 경우
 
+### CONNECTING 상태
 
+로커와 연결을 시도할 때 CONNECTING 상태로 설정한다. 
+
+브로커와 통신하기 위해 
+
+send.buffer.bytes에 설정된 송신 버퍼(send buffer size)의 크기와 receive.buffer.bytes에 설정된 수신 버퍼(receive buffer)의 크기
+
+SocketChannel을 생성한다. 크기를 별도로 설정하지 않으면 송신 버퍼의 크기는 128KB이고, 수신 버퍼의 크기는 64KB이다. 
+
+만약 값을 '-1'로 설정하면 실행하는 운영체제의 기본값인 SO_SNDBUF와 SO_RCVBUF가 적용된다. (커널의 수신, 송신 버퍼)
 
 
 ### Request 과정 
