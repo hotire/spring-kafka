@@ -1,6 +1,6 @@
 # Kafka
 
-Kafka는 Distributed Streaming Platform 분산 스트리밍 플랫폼 
+Kafka는 Distributed Streaming Platform 분산 스트리밍 플랫폼 (Streaming : 데이터가 지속적으로 유입되고 나가는 과정에서 분석이나 질의)
 
 성능이 뛰어나고 원하는 기간만큼 안정적으로 데이터를 저장한다.  또한 모든 기능이 분산되어 있어 확장성과 내결함성(fault tolerance)이 뛰어나다. 
 
@@ -308,6 +308,20 @@ NetworkClient는 브로커와의 연결 상태를 ClusterConnectionStates로 관
 CONNECTING -> CHECKING_API_VERSIONS -> READY
 
 만약 각 연결 단계에서 문제가 발생한다면 DISCONNECTED 상태로 바뀌고 브로커와 통신하기 위해 다시 연결을 시도한다.
+
+### DISCONNECTED 상태
+
+Kafka 클라이언트와 브로커 노드의 연결이 끊긴 상태로 브로커에 요청을 보내기 위해서 다시 연결을 시도해야한다. 
+
+너무 빈번하게 재시도를 하지 않도록 reconnect.backoff.ms(default 50) 이후에 연결을 시도한다.  
+
+- 브로커 노드로의 연결 초기화가 실패한 경우
+- API 버전이 호환되지 않는 경우
+- 브로커 노드로 요청 전송이 실패한 경우
+- 요청이 전송되고 응답을 기다리다가 타임아웃이 발생한 경우
+- 일정 시간 동안 브로커로 새로운 요청을 보내지 않은 경우
+
+
 
 
 ### Request 과정 
