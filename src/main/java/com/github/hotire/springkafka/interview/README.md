@@ -333,6 +333,14 @@ SocketChannel을 생성한다. 크기를 별도로 설정하지 않으면 송신
 
 만약 값을 '-1'로 설정하면 실행하는 운영체제의 기본값인 SO_SNDBUF와 SO_RCVBUF가 적용된다. (커널의 수신, 송신 버퍼)
 
+### CHECKINGAPIVERSIONS 상태, READY 상태
+
+Kafka 클라이언트는 자신의 API 버전 정보를 담은 ApiVersionRequest를 생성해서 브로커로 전송한다. 
+
+그러면 브로커가 호환되는 버전인지를 판단해서 ApiVersionResponse를 Kafka 클라이언트에 돌려준다. Kafka 클라이언트는 이 응답을 통해 API 호환 여부를 알 수 있다.
+
+API가 문제없이 호환된다면 브로커의 연결 상태는 READY 상태가 된다.
+
 
 ### Request 과정 
 
