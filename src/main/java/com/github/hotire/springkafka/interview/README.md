@@ -396,6 +396,12 @@ SelectionKey 객체를 사용해서 Selector 객체와 SocketChannel 객체를 �
 - OP_CONNECT
 - OP_ACCEPT
 
+
+### KafkaChannel
+
+Kafka는 Kafka 클라이언트와 브로커 사이에 생성된 SocketChannel을 기반으로 인증과 암호화 기능을 추가하기 위해 KafkaChannel 클래스를 구현한다.
+
+
 ### Request 과정 
 
 - sender
