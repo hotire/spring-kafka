@@ -377,6 +377,25 @@ Deque 에 저장하여 관리한다.
 
 max.in.flight.requests.per.connection : 브로커마다 전송할 수 있는 최대 요청, default 5
 
+### Selector
+
+멀티플렉싱 
+
+SocketChannel에 Selector을 등록하는데, 파라미터로 interestSet을 넘긴다. 
+
+interestSet은 interest operation의 집합으로, 이 SocketChannel에서 어떤 연산을 수행하고 싶은지 Selector에 알려주는 역할을 한다.
+
+즉, Selector에 '이 SocketChannel에 이런 연산들이 가능해지면 알려줘'라고 말하는 것이다.
+
+SocketChannel을 Selector에 등록하면 SelectionKey 객체를 얻게 된다. 
+
+SelectionKey 객체를 사용해서 Selector 객체와 SocketChannel 객체를 얻어올 수 있고, 다음 예처럼 SelectionKey 객체를 사용해 등록했던 interestSet을 바꿀 수도 있다
+
+- OP_READ
+- OP_WRITE
+- OP_CONNECT
+- OP_ACCEPT
+
 ### Request 과정 
 
 - sender
