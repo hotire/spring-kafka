@@ -1,6 +1,6 @@
 # Kafka
 
-Kafka는 Distributed Streaming Platform 분산 스트리밍 플랫폼 (Streaming : 데이터가 지속적으로 유입되고 나가는 과정에서 분석이나 질의)
+Kafka는 Distributed Streaming Platform 분산 스트리밍 플랫폼 (Streaming : 데이터가 지속적으로 유입되고 나가는 과정에서 분석이나 질의, 실시간으로 생기는 데이터를 처리하는 플랫폼)
 
 성능이 뛰어나고 원하는 기간만큼 안정적으로 데이터를 저장한다. 또한 모든 기능이 분산되어 있어 확장성과 내결함성(fault tolerance)이 뛰어납니다. 
 
@@ -11,6 +11,13 @@ Kafka는 TCP 위에서 동작하는 자체 바이너리 프로토콜을 사용�
 바이너리 프로토콜을 적절히 구현한 프로듀서(KafkaProducer)와 컨슈머(KafkaConsumer)를 클라이언트로 제공하며 
 
 KafkaProducer를 사용하여 데이터를 발행(publish)하고 KafkaConsumer를 사용하여 데이터를 구독(subscribe)한다. 
+
+- 높은 확장성(scalability)과 가용성(availability, 정상적으로 사용 가능한 정도)
+- 데이터 영속성(persistency)
+- Pub/Sub 모델
+
+분산 스트리밍 플랫폼으로 높은 확작성, 가용성을 자랑하는 한다. pub/sub 제공하는 메시지큐이다. 
+
 
 ### Broker
 
@@ -446,6 +453,20 @@ Kafka 클라이언트가 Metadata로 관리하는 메타데이터는 클러스�
 
 : Kafka 클라이언트가 동작하다가 자기가 알고 있는 메타데이터와 조금 다르거나 이상함을 감지하면 바로 메타데이터 갱신이 필요하다고 인지하게 된다.
 
+
+메타데이터에 대한 변경이 오랜 시간 동안 감지되지 않더라도 일정 시간이 지나면 갱신 요청을 브로커로 전송한다. 
+
+당장은 필요하지 않더라도 Kafka 클러스터에 추가된 브로커나 파티션에 대한 정보를 미리 알아오면 나중에 MetadataRequest를 전송하고 기다리지 않아도 되기 때문이다. 
+
+MetadataUpdater는 마지막 메타데이터 갱신이 성공한 이후 metadata.max.age.ms에 설정한 시간이 지나면 다시 갱신 요청을 전송한다. metadata.max.age.ms 설정의 기본 값은 '300000'으로, 5분이다.
+
+MetadataUpdater가 생성하는 MetadataRequest에는 Kafka 클라이언트가 관심 있어 하는 토픽의 리스트가 담겨 있다. 
+
+다시 돌아오는 응답에는 Kafka에 있는 Kafka 클라이언트가 관심 있다고 보낸 토픽의 정보만 담겨 있다. 
+
+만약 오랜 기간 동안 사용되지 않은 토픽이 있다면 MetadataRequest에 쓸데없는 정보가 포함되어 브로커도 느려지고 주고받는 요청의 크기도 커진다. KafkaProducer는 일정 기간 동안 사용되지 않은 토픽의 정보는 메타데이터에서 제외한다. 
+
+제외된 토픽은 앞으로 전송되는 메타데이터 갱신 요청에 포함되지 않는다. 이 기간은 설정할 수 있는 값이 아니며, 5분이라는 고정값으로 설정되어 있다.
 
 
 ### Request 과정 
