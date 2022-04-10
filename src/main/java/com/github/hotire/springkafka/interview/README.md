@@ -397,9 +397,35 @@ SelectionKey 객체를 사용해서 Selector 객체와 SocketChannel 객체를 �
 - OP_ACCEPT
 
 
+
+
 ### KafkaChannel
 
 Kafka는 Kafka 클라이언트와 브로커 사이에 생성된 SocketChannel을 기반으로 인증과 암호화 기능을 추가하기 위해 KafkaChannel 클래스를 구현한다.
+
+security.protocol에 설정할 수 있는 값에는 다음과 같은 4가지가 있다.
+
+- PLAINTEXT : 인증 미사용, 암호화 미사용
+- SASL_PLAINTEXT : 인증 사용, 암호화 미사용
+- SSL : 인증 미사용, 암호화 사용
+- SASL_SSL : 인증 사용, 암호화 사용
+
+
+### Metadata
+
+KafkaProducer 사용자는 어떤 토픽으로 Key, Value 데이터를 전송할 것인지 ProducerRecord 객체를 만들어 넘겨준다. 사용자 입장에서는 이 데이터가 어떤 브로커 노드로 전송되어야 하는지 모른다.
+
+사용자로부터 ProducerRecord 객체를 넘겨받은 KafkaProducer는 내부적으로 아래와 같은 순서로 브로커 주소를 알게 된다.
+
+1. ProducerRecord
+2. Partitioner
+3. TopicPartition
+4. Metadata
+5. Broker Address
+
+ProducerRecord를 전달받은 KafkaProducer는 Partitioner를 사용해 토픽의 몇 번 파티션으로 데이터를 전송해야 하는지 결정한다. 
+하지만 여전히 그 파티션이 어떤 브로커 노드에 있는지는 모른다. Kafka 클라이언트는 토픽의 파티션이 어떤 브로커에서 서비스되고 있는지 Metadata 클래스를 통해 알게 된다.
+
 
 
 ### Request 과정 
