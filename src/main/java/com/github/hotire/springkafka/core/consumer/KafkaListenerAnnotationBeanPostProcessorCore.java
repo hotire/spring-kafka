@@ -6,7 +6,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.config.MethodKafkaListenerEndpoint;
 import org.springframework.kafka.config.MultiMethodKafkaListenerEndpoint;
 
@@ -14,6 +16,8 @@ import org.springframework.kafka.config.MultiMethodKafkaListenerEndpoint;
  * @see org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProcessor
  */
 public class KafkaListenerAnnotationBeanPostProcessorCore<K, V> {
+    private BeanFactory beanFactory;
+    private final KafkaListenerEndpointRegistrarCore registrar = new KafkaListenerEndpointRegistrarCore();
 
     /**
      * @see org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProcessor#postProcessAfterInitialization(Object, String)
@@ -42,5 +46,7 @@ public class KafkaListenerAnnotationBeanPostProcessorCore<K, V> {
     protected void processListener(MethodKafkaListenerEndpoint<?, ?> endpoint, KafkaListener kafkaListener,
                                    Object bean, Object adminTarget, String beanName) {
 
+        KafkaListenerContainerFactory<?> factory = this.beanFactory.getBean(kafkaListener.containerFactory(), KafkaListenerContainerFactory.class);
+        this.registrar.registerEndpoint(endpoint, factory);
     }
 }
