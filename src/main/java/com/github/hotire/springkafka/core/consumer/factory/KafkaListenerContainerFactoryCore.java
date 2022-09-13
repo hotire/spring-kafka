@@ -4,6 +4,7 @@ import org.springframework.kafka.config.KafkaListenerEndpoint;
 import org.springframework.kafka.listener.AbstractMessageListenerContainer;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.support.JavaUtils;
+import org.springframework.kafka.support.TopicPartitionOffset;
 import org.springframework.kafka.support.converter.MessageConverter;
 
 /**
@@ -33,6 +34,14 @@ public class KafkaListenerContainerFactoryCore<C extends AbstractMessageListener
      * @see org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory#createContainerInstance(KafkaListenerEndpoint)
      */
     public <K, V> ConcurrentMessageListenerContainer<K, V> createContainerInstance(KafkaListenerEndpoint endpoint) {
+        return null;
+    }
+
+    /**
+     * @see org.springframework.kafka.config.AbstractKafkaListenerContainerFactory#createContainer(TopicPartitionOffset...)
+     * @see org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory#createContainer(TopicPartitionOffset...)
+     */
+    public C createContainer(TopicPartitionOffset... topicPartitions) {
         return null;
     }
 }
