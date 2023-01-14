@@ -3,6 +3,7 @@ package com.github.hotire.springkafka.core.admin;
 import org.apache.kafka.clients.admin.Admin;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.KafkaAdminClient;
+import org.apache.kafka.clients.admin.ListConsumerGroupOffsetsResult;
 
 
 /**
@@ -10,6 +11,10 @@ import org.apache.kafka.clients.admin.KafkaAdminClient;
  * @see AdminClient
  * @see KafkaAdminClient
  */
-public class KafkaAdminClientCore {
+public interface KafkaAdminClientCore {
 
+    /**
+     * @see Admin#listConsumerGroupOffsets(String) 
+     */
+    ListConsumerGroupOffsetsResult listConsumerGroupOffsets(String groupId);
 }
