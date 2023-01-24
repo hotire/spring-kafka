@@ -5,6 +5,7 @@ import org.springframework.kafka.support.converter.MessageConverter;
 
 /**
  * @see org.springframework.kafka.config.KafkaListenerEndpoint
+ * @see org.springframework.kafka.config.KafkaListenerEndpointAdapter
  * @see org.springframework.kafka.config.AbstractKafkaListenerEndpoint
  * @see org.springframework.kafka.config.MethodKafkaListenerEndpoint
  */
