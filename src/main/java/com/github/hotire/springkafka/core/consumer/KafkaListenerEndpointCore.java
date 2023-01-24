@@ -14,5 +14,5 @@ interface KafkaListenerEndpointCore {
     /**
      * @see org.springframework.kafka.config.AbstractKafkaListenerEndpoint#setupListenerContainer(MessageListenerContainer, MessageConverter)
      */
-    void setupListenerContainer(MessageListenerContainer listenerContainer, MessageConverter messageConverter)
+    void setupListenerContainer(MessageListenerContainer listenerContainer, MessageConverter messageConverter);
 }
