@@ -9,12 +9,10 @@ import org.springframework.kafka.support.converter.MessageConverter;
  * @see org.springframework.kafka.config.AbstractKafkaListenerEndpoint
  * @see org.springframework.kafka.config.MethodKafkaListenerEndpoint
  */
-public class KafkaListenerEndpointCore {
+interface KafkaListenerEndpointCore {
 
     /**
      * @see org.springframework.kafka.config.AbstractKafkaListenerEndpoint#setupListenerContainer(MessageListenerContainer, MessageConverter)
      */
-    public void setupListenerContainer(MessageListenerContainer listenerContainer, MessageConverter messageConverter) {
-
-    }
+    void setupListenerContainer(MessageListenerContainer listenerContainer, MessageConverter messageConverter)
 }
