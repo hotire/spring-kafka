@@ -16,7 +16,7 @@ class KafkaListenerContainerFactoryCoreTest {
     void create() {
         // when
         final String topic = "topic";
-        final ConsumerFactory<String, String> consumerFactory = new DefaultKafkaConsumerFactory(new HashMap<>());
+        final ConsumerFactory<String, String> consumerFactory = new DefaultKafkaConsumerFactory<>(new HashMap<>());
         final ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
         final ConcurrentMessageListenerContainer<String, String> container  = factory.createContainer(topic);
