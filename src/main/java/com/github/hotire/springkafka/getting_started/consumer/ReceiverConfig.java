@@ -1,9 +1,21 @@
 package com.github.hotire.springkafka.getting_started.consumer;
 
+import com.github.hotire.springkafka.getting_started.CustomKafkaListenerAnnotationBeanPostProcessor;
+import com.github.hotire.springkafka.getting_started.SkippableException;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.time.Duration;
 import java.util.Map;
-
+import javax.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.Consumer;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient;
+import org.apache.kafka.common.utils.SystemTime;
+import org.apache.kafka.common.utils.Timer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,12 +37,6 @@ import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.retry.support.RetryTemplateBuilder;
 
-import com.github.hotire.springkafka.getting_started.CustomKafkaListenerAnnotationBeanPostProcessor;
-import com.github.hotire.springkafka.getting_started.SkippableException;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
@@ -42,7 +48,9 @@ public class ReceiverConfig {
 
     @Bean
     public Map<String, Object> consumerConfigs() {
-        return kafkaProperties.buildConsumerProperties();
+        final Map<String, Object> consumerConfigs = kafkaProperties.buildConsumerProperties();
+        consumerConfigs.put(ConsumerConfig.RETRY_BACKOFF_MS_CONFIG, 3000);
+        return consumerConfigs;
     }
 
     @Bean
