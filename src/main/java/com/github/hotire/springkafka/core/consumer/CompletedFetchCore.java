@@ -13,4 +13,17 @@ public class CompletedFetchCore {
      */
     private boolean isConsumed = false;
 
+    /**
+     * @see Fetcher.CompletedFetch#initialized
+     */
+    private boolean initialized = false;
+
+
+    /**
+     * @see Fetcher.CompletedFetch#drain()
+     */
+    public void drain() {
+
+    }
+
 }
