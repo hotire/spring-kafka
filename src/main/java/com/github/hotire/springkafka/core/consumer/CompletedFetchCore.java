@@ -8,4 +8,9 @@ import org.apache.kafka.clients.consumer.internals.Fetcher;
  */
 public class CompletedFetchCore {
 
+    /**
+     * @see Fetcher.CompletedFetch#isConsumed
+     */
+    private boolean isConsumed = false;
+
 }
