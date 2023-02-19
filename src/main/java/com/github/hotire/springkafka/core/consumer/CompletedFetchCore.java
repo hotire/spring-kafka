@@ -1,5 +1,8 @@
 package com.github.hotire.springkafka.core.consumer;
 
+import java.util.Collections;
+import java.util.List;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.internals.Fetcher;
 import org.apache.kafka.common.record.Record;
 import org.apache.kafka.common.utils.CloseableIterator;
@@ -8,7 +11,7 @@ import org.apache.kafka.common.utils.CloseableIterator;
  * @see Fetcher
  * @see Fetcher.CompletedFetch
  */
-public class CompletedFetchCore {
+public class CompletedFetchCore<K, V> {
 
     /**
      * @see Fetcher.CompletedFetch#isConsumed
@@ -40,4 +43,10 @@ public class CompletedFetchCore {
         return records.next();
     }
 
+    /**
+     * @see Fetcher.CompletedFetch#fetchRecords(int) 
+     */
+    private List<ConsumerRecord<K, V>> fetchRecords(int maxRecords) {
+        return Collections.emptyList();
+    }
 }
