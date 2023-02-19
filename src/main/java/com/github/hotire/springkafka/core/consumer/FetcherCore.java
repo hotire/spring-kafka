@@ -5,6 +5,6 @@ import org.apache.kafka.clients.consumer.internals.Fetcher;
 /**
  * @see Fetcher
  */
-public class FetcherCore {
+public class FetcherCore<K, V>{
 
 }
