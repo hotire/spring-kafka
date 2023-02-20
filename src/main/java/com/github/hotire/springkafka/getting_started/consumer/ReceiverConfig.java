@@ -50,6 +50,7 @@ public class ReceiverConfig {
     public Map<String, Object> consumerConfigs() {
         final Map<String, Object> consumerConfigs = kafkaProperties.buildConsumerProperties();
         consumerConfigs.put(ConsumerConfig.RETRY_BACKOFF_MS_CONFIG, 3000);
+        consumerConfigs.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, ConsumerConfig.DEFAULT_MAX_PARTITION_FETCH_BYTES * 5);
         return consumerConfigs;
     }
 
