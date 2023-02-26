@@ -8,8 +8,14 @@ import org.springframework.kafka.listener.ContainerProperties;
  */
 public class ContainerPropertiesCore {
 
+    /**
+     * @see ContainerProperties#consumerTaskExecutor
+     */
     private AsyncListenableTaskExecutor consumerTaskExecutor;
 
+    /**
+     * @see ContainerProperties#getConsumerTaskExecutor()
+     */
     public AsyncListenableTaskExecutor getConsumerTaskExecutor() {
         return this.consumerTaskExecutor;
     }
