@@ -1,15 +1,32 @@
 package com.github.hotire.springkafka.interview.consumer;
 
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.springframework.kafka.listener.KafkaMessageListenerContainer;
+
 /**
- * @see org.springframework.kafka.listener.KafkaMessageListenerContainer.ListenerConsumer
+ * @see KafkaMessageListenerContainer.ListenerConsumer
  */
-public class ListenerConsumerCore {
+public class ListenerConsumerCore<K, V> {
 
     /**
-     * @see org.springframework.kafka.listener.KafkaMessageListenerContainer.ListenerConsumer#run()
+     * @see KafkaMessageListenerContainer.ListenerConsumer#run()
      */
     public void run() { // NOSONAR complexity
 
+    }
+
+    /**
+     * @see KafkaMessageListenerContainer.ListenerConsumer#pollAndInvoke()
+     */
+    protected void pollAndInvoke() {
+
+    }
+
+    /**
+     * @see KafkaMessageListenerContainer.ListenerConsumer#doPoll()
+     */
+    private ConsumerRecords<K, V> doPoll() {
+        return ConsumerRecords.empty();
     }
 
 }
