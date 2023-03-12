@@ -13,6 +13,10 @@ study
 
 - https://www.baeldung.com/spring-boot-kafka-testing
 
+### Optimizing Kafka consumers
+
+- https://strimzi.io/blog/2021/01/07/consumer-tuning/
+
 ## Core Concepts
 
 ### Producer
