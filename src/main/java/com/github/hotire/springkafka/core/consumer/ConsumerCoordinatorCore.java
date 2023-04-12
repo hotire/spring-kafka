@@ -4,6 +4,6 @@ import org.apache.kafka.clients.consumer.internals.ConsumerCoordinator;
 /**
  * @see ConsumerCoordinator
  */
-public class ConsumerCoordinatorCore {
+public class c {
 
 }
