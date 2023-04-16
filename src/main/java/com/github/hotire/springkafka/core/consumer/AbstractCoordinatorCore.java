@@ -3,6 +3,7 @@ package com.github.hotire.springkafka.core.consumer;
 import org.apache.kafka.clients.consumer.internals.AbstractCoordinator;
 import org.apache.kafka.clients.consumer.internals.RequestFuture;
 import org.apache.kafka.common.utils.KafkaThread;
+import org.apache.kafka.common.utils.Timer;
 
 /**
  * @see AbstractCoordinator
@@ -26,6 +27,17 @@ public class AbstractCoordinatorCore {
                 "the maximum size of batches returned in poll() with max.poll.records.";
             maybeLeaveGroup(leaveReason);
         }
+    }
+
+    boolean ensureActiveGroup(final Timer timer) {
+        // always ensure that the coordinator is ready because we may have been disconnected
+        // when sending heartbeats and does not necessarily require us to rejoin the group.
+        startHeartbeatThreadIfNeeded();
+        return true;
+    }
+
+    private synchronized void startHeartbeatThreadIfNeeded() {
+        new AbstractCoordinatorCore.HeartbeatThread("", true).start();
     }
 
     /**
