@@ -1,6 +1,8 @@
 package com.github.hotire.springkafka.core.consumer;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.internals.AbstractCoordinator;
+import org.apache.kafka.clients.consumer.internals.Heartbeat;
 import org.apache.kafka.clients.consumer.internals.RequestFuture;
 import org.apache.kafka.common.utils.KafkaThread;
 import org.apache.kafka.common.utils.Timer;
@@ -8,7 +10,20 @@ import org.apache.kafka.common.utils.Timer;
 /**
  * @see AbstractCoordinator
  */
+@RequiredArgsConstructor
 public class AbstractCoordinatorCore {
+
+    /**
+     * @see AbstractCoordinator#heartbeat
+     */
+    private final Heartbeat heartbeat;
+
+    /**
+     * @see AbstractCoordinator#pollHeartbeat(long)
+     */
+    protected synchronized void pollHeartbeat(long now) {
+        heartbeat.poll(now);
+    }
 
     /**
      * @see AbstractCoordinator.HeartbeatThread
