@@ -29,6 +29,9 @@ public class AbstractCoordinatorCore {
         }
     }
 
+    /**
+     * @see AbstractCoordinator#ensureActiveGroup()
+     */
     boolean ensureActiveGroup(final Timer timer) {
         // always ensure that the coordinator is ready because we may have been disconnected
         // when sending heartbeats and does not necessarily require us to rejoin the group.
@@ -36,6 +39,9 @@ public class AbstractCoordinatorCore {
         return true;
     }
 
+    /**
+     * @see AbstractCoordinator#startHeartbeatThreadIfNeeded()
+     */
     private synchronized void startHeartbeatThreadIfNeeded() {
         new AbstractCoordinatorCore.HeartbeatThread("", true).start();
     }
