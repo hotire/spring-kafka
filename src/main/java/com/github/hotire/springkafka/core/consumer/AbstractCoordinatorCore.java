@@ -2,13 +2,21 @@ package com.github.hotire.springkafka.core.consumer;
 
 import org.apache.kafka.clients.consumer.internals.AbstractCoordinator;
 import org.apache.kafka.clients.consumer.internals.RequestFuture;
+import org.apache.kafka.common.utils.KafkaThread;
 
 /**
  * @see AbstractCoordinator
  */
 public class AbstractCoordinatorCore {
 
-    private class HeartbeatThread  {
+    /**
+     * @see AbstractCoordinator.HeartbeatThread
+     */
+    private class HeartbeatThread extends KafkaThread {
+
+        public HeartbeatThread(String name, boolean daemon) {
+            super(name, daemon);
+        }
 
         public void run() {
             final String leaveReason = "consumer poll timeout has expired. This means the time between subsequent calls to poll() " +
