@@ -34,6 +34,9 @@ public class AbstractCoordinatorCore {
             super(name, daemon);
         }
 
+        /**
+         * @see AbstractCoordinator.HeartbeatThread#run()
+         */
         public void run() {
             final String leaveReason = "consumer poll timeout has expired. This means the time between subsequent calls to poll() " +
                 "was longer than the configured max.poll.interval.ms, which typically implies that " +
@@ -41,6 +44,13 @@ public class AbstractCoordinatorCore {
                 "You can address this either by increasing max.poll.interval.ms or by reducing " +
                 "the maximum size of batches returned in poll() with max.poll.records.";
             maybeLeaveGroup(leaveReason);
+        }
+
+        /**
+         * @see org.apache.kafka.clients.consumer.internals.Heartbeat#pollTimeoutExpired(long) 
+         */
+        boolean pollTimeoutExpired(long now) {
+           return false;
         }
     }
 
