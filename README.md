@@ -161,6 +161,10 @@ https://saramin.github.io/2019-09-17-kafka/
 https://joooootopia.tistory.com/30
 
 
+## Kafka Client-side Assignment Proposal
+
+https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Client-side+Assignment+Proposal
+
 ## References
 
 - Kafka : https://youtu.be/waw0XXNX-uQ?list=PL3Re5Ri5rZmkY46j6WcJXQYRlDRZSUQ1j
